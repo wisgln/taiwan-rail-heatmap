@@ -1,0 +1,841 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <title>台鐵人流熱力圖</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="https://unpkg.com/leaflet.heat@0.2.0/dist/leaflet-heat.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@3.0.1/dist/chartjs-plugin-annotation.min.js"></script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Microsoft JhengHei', sans-serif; background: #f5f5f5; }
+    #header {
+      background: #1a1a2e; color: white; padding: 16px 24px;
+      display: flex; align-items: center; gap: 16px; z-index: 1000; position: relative;
+    }
+    #header h1 { font-size: 20px; font-weight: 500; }
+    #map { width: 100%; height: calc(100vh - 56px); }
+    #city-select, #station-select {
+      padding: 8px 14px; border-radius: 8px; border: none;
+      background: rgba(255,255,255,0.15); color: white;
+      font-size: 14px; font-family: 'Microsoft JhengHei', sans-serif;
+      cursor: pointer; min-width: 140px;
+    }
+    #city-select option, #station-select option { background: #1a1a2e; color: white; }
+
+    #modal-overlay {
+      display: none; position: fixed; inset: 0;
+      background: rgba(0,0,0,0.5); z-index: 2000;
+      align-items: center; justify-content: center;
+    }
+    #modal-overlay.active { display: flex; }
+    #modal {
+      background: white; border-radius: 16px;
+      width: 980px; max-width: 95vw;
+      height: 90vh; display: flex; flex-direction: column;
+      position: relative; box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+      overflow: hidden;
+    }
+    #modal-close {
+      position: absolute; top: 16px; right: 20px;
+      font-size: 24px; cursor: pointer; color: #aaa;
+      background: none; border: none; line-height: 1; z-index: 10;
+    }
+    #modal-close:hover { color: #333; }
+    #modal-header {
+      padding: 28px 36px 16px; border-bottom: 1px solid #eee; flex-shrink: 0;
+    }
+    #modal-header h2 { font-size: 26px; color: #1a1a2e; margin-bottom: 4px; }
+    #modal-header .city { font-size: 14px; color: #888; margin-bottom: 12px; }
+    #modal-header .badges { display: flex; align-items: center; gap: 12px; }
+    #total-badge {
+      display: inline-block; background: #1a1a2e; color: white;
+      padding: 6px 16px; border-radius: 20px; font-size: 14px;
+    }
+    #crowding-badge {
+      display: none; padding: 6px 16px; border-radius: 20px;
+      font-size: 14px; font-weight: 500; color: white;
+    }
+    #modal-body { flex: 1; overflow-y: auto; padding: 20px 36px 8px; }
+    #loading { text-align: center; color: #aaa; padding: 60px 0; font-size: 15px; }
+  </style>
+</head>
+<body>
+
+  <div id="header">
+    <h1>🚆 台鐵人流熱力圖</h1>
+    <select id="city-select" onchange="filterCity()">
+      <option value="">選擇城市</option>
+    </select>
+    <select id="station-select" onchange="selectFromDropdown()" style="display:none">
+      <option value="">選擇車站</option>
+    </select>
+    <button onclick="openCompare()" style="
+      margin-left: auto;
+      padding: 8px 18px;
+      border-radius: 8px;
+      border: 1.5px solid rgba(255,255,255,0.4);
+      background: transparent;
+      color: white;
+      font-size: 14px;
+      font-family: 'Microsoft JhengHei', sans-serif;
+      cursor: pointer;
+    ">⚖️ 車站比較</button>
+    <button onclick="openCustomForecast()" style="
+      padding: 8px 18px;
+      border-radius: 8px;
+      border: 1.5px solid rgba(255,255,255,0.4);
+      background: transparent;
+      color: white;
+      font-size: 14px;
+      font-family: 'Microsoft JhengHei', sans-serif;
+      cursor: pointer;
+    ">🔮 自訂預測</button>
+    <button onclick="openRanking()" style="
+      padding: 8px 18px;
+      border-radius: 8px;
+      border: 1.5px solid rgba(255,255,255,0.4);
+      background: transparent;
+      color: white;
+      font-size: 14px;
+      font-family: 'Microsoft JhengHei', sans-serif;
+      cursor: pointer;
+    ">🏆 人流排行</button>
+  </div>
+
+  <!-- 車站比較 Modal -->
+<div id="compare-overlay" style="
+display:none; position:fixed; inset:0;
+background:rgba(0,0,0,0.5); z-index:3000;
+align-items:center; justify-content:center;">
+<div style="
+  background:white; border-radius:16px;
+  width:780px; max-width:95vw;
+  padding:32px; position:relative;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+  max-height:90vh; overflow-y:auto;">
+  <button onclick="closeCompare()" style="
+    position:absolute; top:16px; right:20px;
+    font-size:24px; cursor:pointer; color:#aaa;
+    background:none; border:none;">✕</button>
+
+  <h2 style="font-size:22px; color:#1a1a2e; margin-bottom:20px;">⚖️ 車站比較</h2>
+
+  <div style="display:flex; gap:16px; margin-bottom:20px;">
+    <!-- 車站 A -->
+    <div style="flex:1;">
+      <label style="font-size:13px; color:#4a90d9; font-weight:600;">🔵 車站 A</label>
+      <select id="compare-city-a" onchange="filterCompareCity('a')" style="
+        width:100%; margin:6px 0 8px; padding:10px 14px;
+        border-radius:8px; border:1.5px solid #ddd;
+        font-size:14px; font-family:'Microsoft JhengHei',sans-serif;">
+        <option value="">選擇城市...</option>
+      </select>
+      <select id="compare-station-a" style="
+        width:100%; padding:10px 14px;
+        border-radius:8px; border:1.5px solid #ddd;
+        font-size:14px; font-family:'Microsoft JhengHei',sans-serif;">
+        <option value="">選擇車站...</option>
+      </select>
+    </div>
+
+    <div style="display:flex; align-items:center; font-size:20px; color:#aaa; padding-top:24px;">vs</div>
+
+    <!-- 車站 B -->
+    <div style="flex:1;">
+      <label style="font-size:13px; color:#e05c5c; font-weight:600;">🔴 車站 B</label>
+      <select id="compare-city-b" onchange="filterCompareCity('b')" style="
+        width:100%; margin:6px 0 8px; padding:10px 14px;
+        border-radius:8px; border:1.5px solid #ddd;
+        font-size:14px; font-family:'Microsoft JhengHei',sans-serif;">
+        <option value="">選擇城市...</option>
+      </select>
+      <select id="compare-station-b" style="
+        width:100%; padding:10px 14px;
+        border-radius:8px; border:1.5px solid #ddd;
+        font-size:14px; font-family:'Microsoft JhengHei',sans-serif;">
+        <option value="">選擇車站...</option>
+      </select>
+    </div>
+  </div>
+
+  <button onclick="runCompare()" style="
+    width:100%; padding:12px;
+    background:#1a1a2e; color:white;
+    border:none; border-radius:8px;
+    font-size:15px; font-family:'Microsoft JhengHei',sans-serif;
+    cursor:pointer; margin-bottom:20px;">開始比較</button>
+
+  <div id="compare-loading" style="display:none; text-align:center; color:#aaa; padding:30px 0;">資料載入中...</div>
+  <div id="compare-result" style="display:none;">
+    <div id="compare-summary" style="display:flex; gap:12px; margin-bottom:16px;"></div>
+    <div style="height:300px;">
+      <canvas id="compareChart"></canvas>
+    </div>
+  </div>
+</div>
+</div>
+<!-- 排行榜 Modal -->
+<div id="ranking-overlay" style="
+  display:none; position:fixed; inset:0;
+  background:rgba(0,0,0,0.5); z-index:3000;
+  align-items:center; justify-content:center;">
+  <div style="
+    background:white; border-radius:16px;
+    width:480px; max-width:92vw;
+    padding:32px; position:relative;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+    max-height:85vh; overflow-y:auto;">
+    <button onclick="closeRanking()" style="
+      position:absolute; top:16px; right:20px;
+      font-size:24px; cursor:pointer; color:#aaa;
+      background:none; border:none;">✕</button>
+    <h2 style="font-size:22px; color:#1a1a2e; margin-bottom:4px;">🏆 人流排行榜</h2>
+    <p style="font-size:13px; color:#888; margin-bottom:20px;">2026 年 1月～6月 總人流</p>
+    <div id="ranking-list"></div>
+  </div>
+</div>
+<!-- 自訂預測 Modal -->
+<div id="custom-overlay" style="
+  display:none; position:fixed; inset:0;
+  background:rgba(0,0,0,0.5); z-index:3000;
+  align-items:center; justify-content:center;">
+  <div style="
+    background:white; border-radius:16px;
+    width:480px; max-width:92vw;
+    padding:32px; position:relative;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3);">
+    <button onclick="closeCustomForecast()" style="
+      position:absolute; top:16px; right:20px;
+      font-size:24px; cursor:pointer; color:#aaa;
+      background:none; border:none;">✕</button>
+
+    <h2 style="font-size:22px; color:#1a1a2e; margin-bottom:20px;">🔮 自訂預測</h2>
+
+    <!-- 選城市 -->
+    <label style="font-size:13px; color:#888;">城市</label>
+    <select id="custom-city" onchange="filterCustomCity()" style="
+      width:100%; margin:6px 0 14px; padding:10px 14px;
+      border-radius:8px; border:1.5px solid #ddd;
+      font-size:14px; font-family:'Microsoft JhengHei',sans-serif;">
+      <option value="">選擇城市...</option>
+    </select>
+
+    <!-- 選車站 -->
+    <label style="font-size:13px; color:#888;">車站</label>
+    <select id="custom-station" style="
+      width:100%; margin:6px 0 14px; padding:10px 14px;
+      border-radius:8px; border:1.5px solid #ddd;
+      font-size:14px; font-family:'Microsoft JhengHei',sans-serif;">
+      <option value="">選擇車站...</option>
+    </select>
+
+<!-- 選日期區間 -->
+<div style="display:flex; gap:12px; margin-bottom:20px;">
+  <div style="flex:1;">
+    <label style="font-size:13px; color:#888;">開始日期</label>
+    <input type="date" id="custom-start-date"
+      value="2026-06-27"
+      min="2026-06-02"
+      max="2026-12-31"
+      style="width:100%; margin-top:6px; padding:10px 14px;
+        border-radius:8px; border:1.5px solid #ddd;
+        font-size:14px; font-family:'Microsoft JhengHei',sans-serif;">
+  </div>
+  <div style="flex:1;">
+    <label style="font-size:13px; color:#888;">結束日期</label>
+    <input type="date" id="custom-end-date"
+      value="2026-07-03"
+      min="2026-06-02"
+      max="2026-12-31"
+      style="width:100%; margin-top:6px; padding:10px 14px;
+        border-radius:8px; border:1.5px solid #ddd;
+        font-size:14px; font-family:'Microsoft JhengHei',sans-serif;">
+  </div>
+</div>
+
+    <button onclick="runCustomForecast()" style="
+      width:100%; padding:12px;
+      background:#1a1a2e; color:white;
+      border:none; border-radius:8px;
+      font-size:15px; font-family:'Microsoft JhengHei',sans-serif;
+      cursor:pointer;">開始預測</button>
+
+    <!-- 結果圖表 -->
+    <div id="custom-loading" style="display:none; text-align:center; color:#aaa; padding:30px 0;">預測計算中...</div>
+    <div id="custom-result" style="display:none; margin-top:20px;">
+      <p style="font-size:13px; color:#888; margin-bottom:8px;">🔮 預測結果</p>
+      <div style="height:220px;">
+        <canvas id="customChart"></canvas>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="map"></div>
+
+<div id="modal-overlay">
+  <div id="modal">
+    <button id="modal-close" onclick="closeModal()">✕</button>
+    <div id="modal-header">
+      <h2 id="station-name"></h2>
+      <div class="city" id="station-city"></div>
+      <div class="badges">
+        <div id="total-badge"></div>
+        <div id="crowding-badge"></div>
+      </div>
+    </div>
+    <div id="modal-body">
+      <div id="loading">預測計算中，請稍候...</div>
+      <div id="chart-container" style="display:none">
+        <p style="font-size:13px; color:#888; margin-bottom:8px;">📈 歷史人流</p>
+        <div style="height:260px; margin-bottom:20px;">
+          <canvas id="histChart"></canvas>
+        </div>
+        <p style="font-size:13px; color:#888; margin-bottom:8px;">📊 每日平均分析</p>
+          <div style="height:200px; margin-bottom:20px;">
+          <canvas id="weekdayChart"></canvas>
+        </div>
+        <p style="font-size:13px; color:#888; margin-bottom:8px;">🔮 未來預測</p>
+        <div style="height:260px; margin-bottom:0;">
+          <canvas id="foreChart"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  const map = L.map('map').setView([23.97, 120.97], 8);
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+    attribution: '© OpenStreetMap © CARTO'
+  }).addTo(map);
+
+  let chartInstance = null;
+  const holidayRanges = [
+  { start: '02-14', end: '02-22', label: '春節' },
+  { start: '02-27', end: '03-01', label: '228連假' },
+  { start: '04-03', end: '04-06', label: '清明連假' },
+  { start: '05-01', end: '05-03', label: '勞動節' },
+];
+  let allStations = [];
+
+  function filterCity() {
+    const city = document.getElementById('city-select').value;
+    const stationSelect = document.getElementById('station-select');
+    stationSelect.innerHTML = '<option value="">選擇車站</option>';
+    if (!city) { stationSelect.style.display = 'none'; return; }
+    allStations.filter(s => s.city === city).forEach(s => {
+      const opt = document.createElement('option');
+      opt.value = s.staCode;
+      opt.textContent = s.name_zh;
+      stationSelect.appendChild(opt);
+    });
+    stationSelect.style.display = 'block';
+  }
+
+  function selectFromDropdown() {
+    const code = document.getElementById('station-select').value;
+    if (!code) return;
+    const s = allStations.find(s => s.staCode === code);
+    if (s) loadStation(s);
+  }
+
+  function closeModal() {
+    document.getElementById('modal-overlay').classList.remove('active');
+  }
+
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+  document.getElementById('modal-overlay').addEventListener('click', function(e) {
+    if (e.target === this) closeModal();
+  });
+
+  fetch('/api/stations')
+    .then(res => res.json())
+    .then(stations => {
+      allStations = stations;
+      const cities = [...new Set(stations.map(s => s.city))].sort();
+      const citySelect = document.getElementById('city-select');
+      cities.forEach(c => {
+        const opt = document.createElement('option');
+        opt.value = c; opt.textContent = c;
+        citySelect.appendChild(opt);
+      });
+
+      const heatData = stations.map(s => [s.lat, s.lon, s.total / 1000000]);
+      L.heatLayer(heatData, { radius: 25, blur: 20, minOpacity: 0.4 }).addTo(map);
+
+      stations.forEach(s => {
+        const marker = L.circleMarker([s.lat, s.lon], {
+          radius: 5, color: '#1a1a2e', fillColor: '#4a90d9',
+          fillOpacity: 0.8, weight: 1.5
+        }).addTo(map);
+        marker.bindTooltip(s.name_zh, { permanent: false });
+        marker.on('click', () => loadStation(s));
+      });
+    });
+
+  function loadStation(s) {
+    document.getElementById('modal-overlay').classList.add('active');
+    document.getElementById('station-name').textContent = s.name_zh + ' 車站';
+    document.getElementById('station-city').textContent = s.city;
+    document.getElementById('total-badge').textContent = '2026 年總人流：' + s.total.toLocaleString() + ' 人次';
+    document.getElementById('crowding-badge').style.display = 'none';
+    document.getElementById('loading').style.display = 'block';
+    document.getElementById('chart-container').style.display = 'none';
+
+    if (chartInstance) { chartInstance.destroy(); chartInstance = null; }
+    if (window.weekdayChartInstance) { window.weekdayChartInstance.destroy(); window.weekdayChartInstance = null; }
+    const oldTable = document.querySelector('#chart-container .crowding-table');
+    if (oldTable) oldTable.remove();
+
+    Promise.all([
+    fetch(`/api/station/${s.staCode}`).then(r => r.json()),
+    fetch(`/api/forecast/${s.staCode}`).then(r => r.json()),
+    fetch(`/api/crowding/${s.staCode}`).then(r => r.json()),
+    fetch(`/api/weekday-analysis/${s.staCode}`).then(r => r.json())
+    ]).then(([history, forecast, crowding, weekday]) => {
+      document.getElementById('loading').style.display = 'none';
+      document.getElementById('chart-container').style.display = 'block';
+
+      const latest = crowding.recent[crowding.recent.length - 1];
+      const badge = document.getElementById('crowding-badge');
+      badge.style.display = 'inline-block';
+      badge.style.background = latest.color;
+      badge.textContent = `${latest.emoji} 最近狀態：${latest.label}`;
+
+      const histLabels = history.map(d => d.date.slice(5));
+      const histTotal = history.map(d => d.total);
+      const foreLabels = forecast.map(d => d.ds.slice(5));
+      const foreYhat = forecast.map(d => d.yhat);
+      const foreLower = forecast.map(d => d.yhat_lower);
+      const foreUpper = forecast.map(d => d.yhat_upper);
+
+      chartInstance = new Chart(document.getElementById('histChart'), {
+        type: 'line',
+        data: {
+          labels: histLabels,
+          datasets: [{
+            label: '實際人流', data: histTotal,
+            borderColor: '#4a90d9', backgroundColor: 'rgba(74,144,217,0.08)',
+            borderWidth: 2, pointRadius: 0, fill: true, tension: 0.3
+          }]
+        },
+        options: {
+          responsive: true, maintainAspectRatio: false,
+          plugins: {
+  legend: { labels: { font: { size: 13 } } },
+  annotation: {
+  annotations: Object.fromEntries(
+    holidayRanges.map((h, i) => [
+      `holiday${i}`,
+      {
+        type: 'box',
+        xMin: h.start,
+        xMax: h.end,
+        backgroundColor: 'rgba(255, 99, 132, 0.08)',
+        borderColor: 'rgba(255, 99, 132, 0.3)',
+        borderWidth: 1,
+        label: {
+          display: true,
+          content: h.label,
+          position: { x: 'center', y: 'start' },
+          font: { size: 11 },
+          color: '#e05c5c',
+          backgroundColor: 'rgba(255,255,255,0.85)',
+          padding: 4
+        }
+      }
+    ])
+  )
+}
+},
+          scales: {
+            x: {
+              ticks: {
+                font: { size: 12 }, maxRotation: 0,
+                callback: function(val) {
+                  const label = this.getLabelForValue(val);
+                  if (!label) return null;
+                  const day = label.slice(3, 5);
+                  if (day === '01' || day === '15') return label;
+                  return null;
+                }
+              }
+            },
+            y: {
+              min: 0,
+              ticks: { font: { size: 12 }, maxTicksLimit: 6,
+                callback: v => v >= 1000 ? (v/1000).toFixed(1) + 'k' : v }
+            }
+          }
+        }
+      });
+// 每日平均分析圖
+const colors = weekday.daily_avg.map((_, i) =>
+  i < 5 ? 'rgba(74,144,217,0.8)' : 'rgba(224,92,92,0.8)'
+);
+
+window.weekdayChartInstance = new Chart(document.getElementById('weekdayChart'), {
+  type: 'bar',
+  data: {
+    labels: weekday.days,
+    datasets: [{
+      label: '平均人流',
+      data: weekday.daily_avg,
+      backgroundColor: colors,
+      borderRadius: 6,
+      borderSkipped: false
+    }]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    plugins: {
+      legend: { display: false },
+      tooltip: {
+        callbacks: {
+          label: ctx => '平均：' + ctx.parsed.y.toLocaleString() + ' 人次',
+          afterLabel: ctx => ctx.dataIndex < 5 ? '平日' : '假日'
+        }
+      }
+    },
+    scales: {
+      x: { ticks: { font: { size: 12 } } },
+      y: {
+        min: 0,
+        ticks: {
+          font: { size: 12 },
+          callback: v => v >= 1000 ? (v/1000).toFixed(1) + 'k' : v
+        }
+      }
+    }
+  }
+});
+      window.foreChartInstance = new Chart(document.getElementById('foreChart'), {
+        type: 'line',
+        data: {
+          labels: foreLabels,
+          datasets: [
+            {
+              label: '預測人流', data: foreYhat,
+              borderColor: '#e05c5c', backgroundColor: 'rgba(224,92,92,0.08)',
+              borderWidth: 2.5, pointRadius: 5, pointBackgroundColor: '#e05c5c',
+              fill: true, tension: 0.3
+            },
+            {
+              label: '預測區間', data: foreUpper,
+              borderColor: 'transparent', backgroundColor: 'rgba(224,92,92,0.12)',
+              fill: '+1', pointRadius: 0
+            },
+            {
+              label: '預測下限', data: foreLower,
+              borderColor: 'transparent', fill: false, pointRadius: 0
+            }
+          ]
+        },
+        options: {
+          responsive: true, maintainAspectRatio: false,
+          plugins: {
+            legend: {
+              labels: {
+                filter: item => item.text !== '預測區間' && item.text !== '預測下限',
+                font: { size: 13 }
+              }
+            },
+            tooltip: { callbacks: { label: ctx => '預測：' + ctx.parsed.y.toLocaleString() + ' 人次' } }
+          },
+          scales: {
+            x: { ticks: { font: { size: 12 }, maxRotation: 0 } },
+            y: {
+              min: 0,
+              ticks: { font: { size: 12 }, maxTicksLimit: 6,
+                callback: v => v >= 1000 ? (v/1000).toFixed(1) + 'k' : v }
+            }
+          }
+        }
+      });
+    });
+  }
+  let customChartInstance = null;
+
+function openCustomForecast() {
+  document.getElementById('custom-overlay').style.display = 'flex';
+  // 複製城市清單
+  const customCity = document.getElementById('custom-city');
+  if (customCity.options.length <= 1) {
+    const cities = [...new Set(allStations.map(s => s.city))].sort();
+    cities.forEach(c => {
+      const opt = document.createElement('option');
+      opt.value = c; opt.textContent = c;
+      customCity.appendChild(opt);
+    });
+  }
+}
+
+function closeCustomForecast() {
+  document.getElementById('custom-overlay').style.display = 'none';
+}
+
+function filterCustomCity() {
+  const city = document.getElementById('custom-city').value;
+  const stationSelect = document.getElementById('custom-station');
+  stationSelect.innerHTML = '<option value="">選擇車站...</option>';
+  allStations.filter(s => s.city === city).forEach(s => {
+    const opt = document.createElement('option');
+    opt.value = s.staCode; opt.textContent = s.name_zh;
+    stationSelect.appendChild(opt);
+  });
+}
+
+function runCustomForecast() {
+  const staCode = document.getElementById('custom-station').value;
+  const endDate = document.getElementById('custom-end-date').value;
+  if (!staCode) { alert('請選擇車站！'); return; }
+  if (!endDate) { alert('請選擇預測結束日期！'); return; }
+
+  document.getElementById('custom-loading').style.display = 'block';
+  document.getElementById('custom-result').style.display = 'none';
+  if (customChartInstance) { customChartInstance.destroy(); customChartInstance = null; }
+
+  const startDate = document.getElementById('custom-start-date').value;
+  fetch(`/api/custom-forecast/${staCode}?start_date=${startDate}&end_date=${endDate}`)
+    .then(r => r.json())
+    .then(forecast => {
+      document.getElementById('custom-loading').style.display = 'none';
+      document.getElementById('custom-result').style.display = 'block';
+
+      const station = allStations.find(s => s.staCode === staCode);
+      customChartInstance = new Chart(document.getElementById('customChart'), {
+        type: 'line',
+        data: {
+          labels: forecast.map(d => d.ds.slice(5)),
+          datasets: [
+            {
+              label: `${station.name_zh} 預測人流`,
+              data: forecast.map(d => d.yhat),
+              borderColor: '#e05c5c',
+              backgroundColor: 'rgba(224,92,92,0.08)',
+              borderWidth: 2.5, pointRadius: 4,
+              pointBackgroundColor: '#e05c5c',
+              fill: true, tension: 0.3
+            },
+            {
+              label: '預測區間',
+              data: forecast.map(d => d.yhat_upper),
+              borderColor: 'transparent',
+              backgroundColor: 'rgba(224,92,92,0.12)',
+              fill: '+1', pointRadius: 0
+            },
+            {
+              label: '預測下限',
+              data: forecast.map(d => d.yhat_lower),
+              borderColor: 'transparent',
+              fill: false, pointRadius: 0
+            }
+          ]
+        },
+        options: {
+          responsive: true, maintainAspectRatio: false,
+          plugins: {
+            legend: {
+              labels: { filter: item => item.text !== '預測區間' && item.text !== '預測下限' }
+            }
+          },
+          scales: {
+            x: { ticks: { font: { size: 11 }, maxTicksLimit: 8, maxRotation: 0 } },
+            y: {
+              min: 0,
+              ticks: { callback: v => v >= 1000 ? (v/1000).toFixed(1) + 'k' : v }
+            }
+          }
+        }
+      });
+    });
+}
+
+// 點遮罩關閉
+document.getElementById('custom-overlay').addEventListener('click', function(e) {
+  if (e.target === this) closeCustomForecast();
+});
+function openRanking() {
+  document.getElementById('ranking-overlay').style.display = 'flex';
+  const list = document.getElementById('ranking-list');
+
+  const top10 = [...allStations]
+    .sort((a, b) => b.total - a.total)
+    .slice(0, 10);
+
+  const medals = ['🥇', '🥈', '🥉'];
+  const colors = ['#FFD700', '#C0C0C0', '#CD7F32'];
+
+  list.innerHTML = top10.map((s, i) => `
+    <div onclick="selectRankStation('${s.staCode}')" style="
+      display:flex; align-items:center; gap:14px;
+      padding:14px 16px; border-radius:12px;
+      margin-bottom:8px; cursor:pointer;
+      border: 1.5px solid #f0f0f0;
+      transition: background 0.15s;
+    "
+    onmouseover="this.style.background='#f8f9ff'"
+    onmouseout="this.style.background='white'">
+      <div style="
+        font-size:${i < 3 ? '24px' : '15px'};
+        font-weight:bold;
+        color:${i < 3 ? colors[i] : '#aaa'};
+        width:32px; text-align:center;">
+        ${i < 3 ? medals[i] : i + 1}
+      </div>
+      <div style="flex:1;">
+        <div style="font-size:15px; font-weight:600; color:#1a1a2e;">${s.name_zh}</div>
+        <div style="font-size:12px; color:#888; margin-top:2px;">${s.city}</div>
+      </div>
+      <div style="text-align:right;">
+        <div style="font-size:14px; font-weight:600; color:#4a90d9;">${(s.total / 10000).toFixed(1)} 萬</div>
+        <div style="font-size:11px; color:#aaa;">總人次</div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function closeRanking() {
+  document.getElementById('ranking-overlay').style.display = 'none';
+}
+
+function selectRankStation(staCode) {
+  const s = allStations.find(s => s.staCode === staCode);
+  if (s) {
+    closeRanking();
+    loadStation(s);
+  }
+}
+
+document.getElementById('ranking-overlay').addEventListener('click', function(e) {
+  if (e.target === this) closeRanking();
+});
+let compareChartInstance = null;
+
+function openCompare() {
+  document.getElementById('compare-overlay').style.display = 'flex';
+  const cities = [...new Set(allStations.map(s => s.city))].sort();
+  ['a', 'b'].forEach(side => {
+    const select = document.getElementById(`compare-city-${side}`);
+    if (select.options.length <= 1) {
+      cities.forEach(c => {
+        const opt = document.createElement('option');
+        opt.value = c; opt.textContent = c;
+        select.appendChild(opt);
+      });
+    }
+  });
+}
+
+function closeCompare() {
+  document.getElementById('compare-overlay').style.display = 'none';
+}
+
+function filterCompareCity(side) {
+  const city = document.getElementById(`compare-city-${side}`).value;
+  const stationSelect = document.getElementById(`compare-station-${side}`);
+  stationSelect.innerHTML = '<option value="">選擇車站...</option>';
+  allStations.filter(s => s.city === city).forEach(s => {
+    const opt = document.createElement('option');
+    opt.value = s.staCode; opt.textContent = s.name_zh;
+    stationSelect.appendChild(opt);
+  });
+}
+
+function runCompare() {
+  const codeA = document.getElementById('compare-station-a').value;
+  const codeB = document.getElementById('compare-station-b').value;
+  if (!codeA || !codeB) { alert('請選擇兩個車站！'); return; }
+  if (codeA === codeB) { alert('請選擇不同的車站！'); return; }
+
+  document.getElementById('compare-loading').style.display = 'block';
+  document.getElementById('compare-result').style.display = 'none';
+  if (compareChartInstance) { compareChartInstance.destroy(); compareChartInstance = null; }
+
+  Promise.all([
+    fetch(`/api/station/${codeA}`).then(r => r.json()),
+    fetch(`/api/station/${codeB}`).then(r => r.json()),
+  ]).then(([dataA, dataB]) => {
+    document.getElementById('compare-loading').style.display = 'none';
+    document.getElementById('compare-result').style.display = 'block';
+
+    const stationA = allStations.find(s => s.staCode === codeA);
+    const stationB = allStations.find(s => s.staCode === codeB);
+
+    // 摘要卡片
+    const totalA = dataA.reduce((sum, d) => sum + d.total, 0);
+    const totalB = dataB.reduce((sum, d) => sum + d.total, 0);
+    document.getElementById('compare-summary').innerHTML = `
+      <div style="flex:1; background:#f0f6ff; border-radius:12px; padding:14px 18px; border-left:4px solid #4a90d9;">
+        <div style="font-size:13px; color:#4a90d9; font-weight:600;">🔵 ${stationA.name_zh}</div>
+        <div style="font-size:20px; font-weight:700; color:#1a1a2e; margin-top:4px;">${(totalA/10000).toFixed(1)} 萬</div>
+        <div style="font-size:12px; color:#888;">2026 年總人流</div>
+      </div>
+      <div style="flex:1; background:#fff0f0; border-radius:12px; padding:14px 18px; border-left:4px solid #e05c5c;">
+        <div style="font-size:13px; color:#e05c5c; font-weight:600;">🔴 ${stationB.name_zh}</div>
+        <div style="font-size:20px; font-weight:700; color:#1a1a2e; margin-top:4px;">${(totalB/10000).toFixed(1)} 萬</div>
+        <div style="font-size:12px; color:#888;">2026 年總人流</div>
+      </div>
+    `;
+
+    const labels = dataA.map(d => d.date.slice(5));
+    compareChartInstance = new Chart(document.getElementById('compareChart'), {
+      type: 'line',
+      data: {
+        labels,
+        datasets: [
+          {
+            label: stationA.name_zh,
+            data: dataA.map(d => d.total),
+            borderColor: '#4a90d9',
+            backgroundColor: 'rgba(74,144,217,0.06)',
+            borderWidth: 2, pointRadius: 0, fill: true, tension: 0.3
+          },
+          {
+            label: stationB.name_zh,
+            data: dataB.map(d => d.total),
+            borderColor: '#e05c5c',
+            backgroundColor: 'rgba(224,92,92,0.06)',
+            borderWidth: 2, pointRadius: 0, fill: true, tension: 0.3
+          }
+        ]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        plugins: { legend: { labels: { font: { size: 13 } } } },
+        scales: {
+          x: {
+            ticks: {
+              font: { size: 11 }, maxRotation: 0,
+              callback: function(val) {
+                const label = this.getLabelForValue(val);
+                if (!label) return null;
+                const day = label.slice(3, 5);
+                if (day === '01' || day === '15') return label;
+                return null;
+              }
+            }
+          },
+          y: {
+            min: 0,
+            ticks: {
+              font: { size: 12 },
+              callback: v => v >= 1000 ? (v/1000).toFixed(1) + 'k' : v
+            }
+          }
+        }
+      }
+    });
+  });
+}
+
+document.getElementById('compare-overlay').addEventListener('click', function(e) {
+  if (e.target === this) closeCompare();
+});
+</script>
+</body>
+</html>

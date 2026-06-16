@@ -1,0 +1,3972 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_50fd11f47ad5606b878d9698f69d14fd {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+
+            <style>html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            </style>
+
+            <style>#map {
+                position:absolute;
+                top:0;
+                bottom:0;
+                right:0;
+                left:0;
+                }
+            </style>
+
+            <script>
+                L_NO_TOUCH = false;
+                L_DISABLE_3D = false;
+            </script>
+
+        
+    <script src="https://cdn.jsdelivr.net/gh/python-visualization/folium@main/folium/templates/leaflet_heat.min.js"></script>
+</head>
+<body>
+    
+    
+            <div class="folium-map" id="map_50fd11f47ad5606b878d9698f69d14fd" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_50fd11f47ad5606b878d9698f69d14fd = L.map(
+                "map_50fd11f47ad5606b878d9698f69d14fd",
+                {
+                    center: [23.97, 120.97],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 8,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_37f28e715d47ddb6eca6cf6a103bb991 = L.tileLayer(
+                "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 20,
+  "maxNativeZoom": 20,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors \u0026copy; \u003ca href=\"https://carto.com/attributions\"\u003eCARTO\u003c/a\u003e",
+  "subdomains": "abcd",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_37f28e715d47ddb6eca6cf6a103bb991.addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            var heat_map_d0b9619be825679729f13ce35d563b4b = L.heatLayer(
+                [[25.04775, 121.51711, 18446781], [24.98888, 121.31449, 8262206], [22.99681, 120.21295, 7895188], [24.13728, 120.68691, 7593645], [25.01434, 121.46377, 7589638], [24.95374, 121.22589, 7279184], [24.80157, 120.97157, 6366234], [25.04927, 121.57906, 5513107], [25.05348, 121.60706, 5091349], [22.63946, 120.30292, 4912612], [24.99123, 121.42442, 4508432], [24.08177, 120.53854, 4281942], [22.68754, 120.30678, 3927550], [25.06406, 121.65233, 3639897], [22.66905, 120.48617, 3517504], [25.0679, 121.66113, 3375682], [23.47915, 120.44114, 3328786], [23.99265, 121.60131, 3192795], [24.97281, 121.25826, 3010900], [24.68654, 120.88041, 2952908], [25.13191, 121.73837, 2896753], [24.10937, 120.61421, 2841639], [24.95455, 121.35517, 2643670], [24.25438, 120.72374, 2536672], [23.95947, 120.56977, 2406896], [24.83919, 121.00946, 1937877], [25.09294, 121.71415, 1931767], [24.86939, 120.99626, 1917180], [24.91939, 121.18363, 1817866], [22.63145, 120.35745, 1795402], [24.57001, 120.82233, 1719165], [23.71184, 120.54099, 1693351], [22.79372, 121.1231, 1673489], [23.30673, 120.32307, 1611812], [24.91427, 121.14637, 1596714], [25.03339, 121.49996, 1553259], [25.10872, 121.80599, 1513891], [24.34448, 120.62702, 1453055], [24.67791, 121.77464, 1408639], [22.55008, 120.53604, 1393146], [24.80766, 121.03941, 1326009], [24.75457, 121.75803, 1239455], [24.90303, 121.04412, 1184883], [23.01923, 120.22429, 1149819], [25.00419, 121.44477, 1086797], [22.92407, 120.28622, 1077842], [23.13333, 120.30653, 1058156], [24.11911, 120.64795, 1012961], [24.18035, 120.70193, 997385], [23.03825, 120.25347, 985948], [22.79223, 120.30004, 985305], [24.23702, 120.55752, 942354], [24.80875, 120.98381, 938104], [24.56481, 120.70824, 909299], [24.21214, 120.70564, 821397], [25.07795, 121.69379, 806296], [24.30933, 120.73288, 795048], [23.85843, 120.59146, 747042], [24.16449, 120.69988, 745898], [24.97268, 121.33658, 739029], [22.72696, 120.32425, 735572], [24.78811, 121.02196, 692624], [25.10838, 121.72904, 688435], [25.07799, 121.66758, 687061], [23.06823, 120.29004, 685744], [24.12877, 120.66654, 649685], [23.55522, 120.43165, 622924], [23.67257, 120.48089, 618621], [24.82703, 121.77535, 609536], [24.93436, 121.08309, 597152], [22.63709, 120.32603, 589746], [23.60089, 120.45597, 575259], [22.85404, 120.26619, 557465], [24.97273, 121.39254, 540465], [24.44344, 120.65146, 539910], [22.93296, 120.23158, 528749], [22.87821, 120.25384, 527733], [24.26364, 120.56918, 512219], [24.14887, 120.69784, 506653], [22.65185, 120.28148, 477549], [25.12305, 121.74202, 471369], [22.63425, 120.34245, 463380], [24.78731, 120.92844, 459407], [24.98044, 121.40884, 459317], [23.33155, 121.31172, 447476], [22.65641, 120.42089, 438349], [23.10726, 120.30202, 437852], [22.76098, 120.31011, 419355], [24.02502, 120.53742, 409640], [23.19271, 120.31917, 396318], [23.81321, 120.61805, 384351], [22.36802, 120.59511, 376100], [24.49141, 120.67843, 373321], [24.61621, 120.78731, 372263], [24.60429, 120.82637, 365182], [23.89573, 120.58077, 350975], [24.92218, 121.05575, 341960], [24.85898, 121.82258, 339194], [22.66589, 120.28701, 334317], [24.23461, 120.7106, 328769], [22.61637, 120.52649, 328536], [24.11424, 120.59021, 319202], [25.01595, 121.94471, 307834], [24.78145, 121.03141, 297475], [22.63879, 120.31494, 296384], [25.04111, 121.77514, 289844], [24.48634, 120.78617, 285365], [23.99002, 120.56062, 281228], [24.15417, 120.54249, 268875], [22.67445, 120.29401, 257859], [24.19572, 120.70398, 254296], [23.75967, 120.61499, 253165], [25.03851, 121.86654, 253012], [22.92354, 120.24054, 251147], [24.42066, 120.77393, 245369], [25.10281, 121.76195, 239456], [23.49981, 120.44851, 234635], [22.64016, 120.39131, 226814], [22.71022, 121.06068, 226217], [23.49738, 121.37684, 225917], [22.63931, 120.29414, 225574], [23.12613, 121.21949, 218443], [24.46342, 121.80103, 212231], [24.10867, 120.62244, 211871], [24.73823, 121.09472, 210679], [23.96823, 121.58266, 210306], [24.60852, 121.82735, 209731], [24.76311, 120.91388, 208376], [24.19748, 120.54335, 204619], [23.43398, 120.39971, 202396], [22.53161, 120.96721, 199826], [22.64181, 120.28071, 197524], [24.29839, 121.75344, 196325], [23.04566, 121.1643, 195162], [24.33146, 120.74181, 193864], [23.36626, 120.36058, 193059], [24.12051, 120.57018, 191172], [23.66631, 121.42117, 190510], [23.92808, 120.57173, 189719], [23.27762, 120.32252, 185274], [22.43135, 120.51529, 182664], [25.08702, 121.82743, 179878], [22.49207, 120.51174, 179314], [24.63633, 121.79211, 173952], [23.24259, 120.32107, 171499], [25.10231, 121.74031, 170190], [24.70535, 121.18255, 147758], [24.59516, 121.85143, 144825], [22.90729, 120.27263, 136855], [24.93109, 121.06751, 135797], [24.37815, 120.65412, 133843], [23.74634, 121.44701, 132024], [24.12756, 121.64086, 123582], [24.64186, 120.86721, 123161], [22.58658, 120.53978, 119696], [24.80657, 121.0034, 118792], [23.90769, 121.5295, 117052], [22.90446, 120.25284, 116528], [23.86901, 121.51064, 115891], [24.72291, 120.87183, 107793], [22.65246, 120.50263, 104135], [24.96677, 121.92253, 81720], [24.30441, 120.60231, 81627], [23.82647, 120.78495, 81232], [22.63481, 120.51432, 77249], [23.73167, 120.57998, 73414], [24.74839, 121.08319, 73212], [22.36526, 120.90094, 72441], [22.91249, 121.13701, 72035], [25.05871, 121.85197, 71032], [22.41409, 120.54774, 67242], [23.41344, 120.38654, 63876], [22.61883, 121.00492, 63572], [23.17924, 121.24864, 62816], [24.93836, 121.88983, 62534], [25.02571, 121.74019, 62466], [24.72041, 121.11772, 61760], [25.02197, 121.90879, 56590], [25.06555, 121.82257, 56300], [25.02391, 121.72391, 55978], [23.17284, 120.32125, 55875], [24.54018, 120.69518, 54987], [24.03253, 121.60166, 54654], [22.51311, 120.51481, 51286], [24.52246, 120.79154, 50137], [24.51827, 121.83072, 48299], [22.66597, 120.46497, 47155], [25.13528, 121.80286, 45047], [24.70528, 121.77409, 44485], [23.63951, 120.47106, 41323], [22.39897, 120.57236, 39338], [24.78681, 121.76271, 37874], [23.83263, 120.86572, 33734], [24.88375, 121.84572, 33126], [24.84391, 121.80913, 31190], [23.83467, 120.70467, 30704], [24.61169, 120.75812, 28693], [24.77776, 121.05582, 26817], [24.90484, 121.8689, 26028], [24.64565, 120.80376, 25817], [23.79845, 120.64211, 23974], [23.81845, 120.85332, 21692], [24.71551, 121.16743, 21049], [24.65641, 120.85825, 19582], [25.13754, 121.79997, 19126], [24.71667, 121.15437, 17108], [24.72062, 121.13622, 16518], [23.71199, 121.41907, 16496], [23.84842, 121.49618, 15662], [24.69415, 121.77526, 14176], [23.58031, 121.38008, 13397], [22.33085, 120.62445, 13084], [22.45794, 120.51129, 12123], [22.95604, 121.15901, 11826], [24.24225, 121.71182, 11776], [24.97832, 121.94507, 9674], [25.03016, 121.74795, 9252], [23.80176, 121.46169, 8471], [22.46102, 120.94176, 8220], [22.76426, 121.09356, 7253], [23.78231, 121.45824, 6806], [24.17199, 121.65536, 6799], [25.03445, 121.76349, 6294], [23.83521, 120.75014, 5407], [23.88279, 121.52045, 4966], [23.42458, 121.34539, 3997], [25.04998, 121.79732, 3759], [24.09041, 121.61095, 3640], [23.27234, 121.30418, 3525], [24.56843, 121.84458, 3449], [24.44879, 121.77601, 3342], [23.60571, 121.38963, 3299], [22.97997, 121.15595, 3219], [22.86194, 121.13778, 3158], [23.10292, 121.17676, 2938], [23.22605, 121.27842, 2880], [22.26704, 120.65947, 1752], [24.33543, 121.76838, 1746], [22.30617, 120.64331, 325], [24.97992, 121.40554, 5], [24.61541, 121.82291, 1]],
+                {
+  "minOpacity": 0.4,
+  "maxZoom": 18,
+  "radius": 20,
+  "blur": 15,
+}
+            );
+        
+    
+            heat_map_d0b9619be825679729f13ce35d563b4b.addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            var circle_marker_9c41facd2a391562c39d3f1e43b6eb3c = L.circleMarker(
+                [25.04775, 121.51711],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_9c41facd2a391562c39d3f1e43b6eb3c.bindTooltip(
+                `<div>
+                     臺北｜總人流：18,446,781
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_71b9265d9e474d4656c699c69124bbf8 = L.circleMarker(
+                [24.98888, 121.31449],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_71b9265d9e474d4656c699c69124bbf8.bindTooltip(
+                `<div>
+                     桃園｜總人流：8,262,206
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_f7ae7592e5c105a61117a3e940383dcf = L.circleMarker(
+                [22.99681, 120.21295],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_f7ae7592e5c105a61117a3e940383dcf.bindTooltip(
+                `<div>
+                     臺南｜總人流：7,895,188
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_07d4b3602d60955f21479d6443be3e07 = L.circleMarker(
+                [24.13728, 120.68691],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_07d4b3602d60955f21479d6443be3e07.bindTooltip(
+                `<div>
+                     臺中｜總人流：7,593,645
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_52b30d4af8b9ca5f7555a1f3ec7183a9 = L.circleMarker(
+                [25.01434, 121.46377],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_52b30d4af8b9ca5f7555a1f3ec7183a9.bindTooltip(
+                `<div>
+                     板橋｜總人流：7,589,638
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_11880ed961fa0e2cc6d8fc1e764bc9b2 = L.circleMarker(
+                [24.95374, 121.22589],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_11880ed961fa0e2cc6d8fc1e764bc9b2.bindTooltip(
+                `<div>
+                     中壢｜總人流：7,279,184
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_fad66c926e78c9cdd06707f79db197ce = L.circleMarker(
+                [24.80157, 120.97157],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_fad66c926e78c9cdd06707f79db197ce.bindTooltip(
+                `<div>
+                     新竹｜總人流：6,366,234
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_6caca4afffcc97b7f68034429b1e70b2 = L.circleMarker(
+                [25.04927, 121.57906],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_6caca4afffcc97b7f68034429b1e70b2.bindTooltip(
+                `<div>
+                     松山｜總人流：5,513,107
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_851fb12a22427644bd7c3f994984c551 = L.circleMarker(
+                [25.05348, 121.60706],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_851fb12a22427644bd7c3f994984c551.bindTooltip(
+                `<div>
+                     南港｜總人流：5,091,349
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_27ba12de9240f3d720cd8becf44e43a5 = L.circleMarker(
+                [22.63946, 120.30292],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_27ba12de9240f3d720cd8becf44e43a5.bindTooltip(
+                `<div>
+                     高雄｜總人流：4,912,612
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_c7863d3a3b02b2b11220f07cf44bef92 = L.circleMarker(
+                [24.99123, 121.42442],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_c7863d3a3b02b2b11220f07cf44bef92.bindTooltip(
+                `<div>
+                     樹林｜總人流：4,508,432
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_1e4acece0d94bc728027ae2a69cc56ad = L.circleMarker(
+                [24.08177, 120.53854],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_1e4acece0d94bc728027ae2a69cc56ad.bindTooltip(
+                `<div>
+                     彰化｜總人流：4,281,942
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_d3a4559171e3b7983157fcfee45e9470 = L.circleMarker(
+                [22.68754, 120.30678],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_d3a4559171e3b7983157fcfee45e9470.bindTooltip(
+                `<div>
+                     新左營｜總人流：3,927,550
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_cacd85488496c6e8b824d9585a8d9778 = L.circleMarker(
+                [25.06406, 121.65233],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_cacd85488496c6e8b824d9585a8d9778.bindTooltip(
+                `<div>
+                     汐科｜總人流：3,639,897
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_18fc2d46ad4ca4e04a7461a832f8eb19 = L.circleMarker(
+                [22.66905, 120.48617],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_18fc2d46ad4ca4e04a7461a832f8eb19.bindTooltip(
+                `<div>
+                     屏東｜總人流：3,517,504
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_c4f65a2c252d2dd5f4f4fdf75f57d517 = L.circleMarker(
+                [25.0679, 121.66113],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_c4f65a2c252d2dd5f4f4fdf75f57d517.bindTooltip(
+                `<div>
+                     汐止｜總人流：3,375,682
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_5f074a875c9bd921507e6ec04ef49ec1 = L.circleMarker(
+                [23.47915, 120.44114],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_5f074a875c9bd921507e6ec04ef49ec1.bindTooltip(
+                `<div>
+                     嘉義｜總人流：3,328,786
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_f8fd53e35e99a0263182158aed5f1032 = L.circleMarker(
+                [23.99265, 121.60131],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_f8fd53e35e99a0263182158aed5f1032.bindTooltip(
+                `<div>
+                     花蓮｜總人流：3,192,795
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_c45f2e8298d9107a9d504350e8fb9b01 = L.circleMarker(
+                [24.97281, 121.25826],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_c45f2e8298d9107a9d504350e8fb9b01.bindTooltip(
+                `<div>
+                     內壢｜總人流：3,010,900
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_0bcd2aa31ce133490069dfe206690cf5 = L.circleMarker(
+                [24.68654, 120.88041],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_0bcd2aa31ce133490069dfe206690cf5.bindTooltip(
+                `<div>
+                     竹南｜總人流：2,952,908
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_454614856fc7999a05fae4049aed2793 = L.circleMarker(
+                [25.13191, 121.73837],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_454614856fc7999a05fae4049aed2793.bindTooltip(
+                `<div>
+                     基隆｜總人流：2,896,753
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_d06d1b4a9ea19d0955510bc02ee65a20 = L.circleMarker(
+                [24.10937, 120.61421],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_d06d1b4a9ea19d0955510bc02ee65a20.bindTooltip(
+                `<div>
+                     新烏日｜總人流：2,841,639
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_a8a55ebbc4ab85a0507d36c6081b700f = L.circleMarker(
+                [24.95455, 121.35517],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_a8a55ebbc4ab85a0507d36c6081b700f.bindTooltip(
+                `<div>
+                     鶯歌｜總人流：2,643,670
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_32afeec9a82e5b11c85b00abffc481c0 = L.circleMarker(
+                [24.25438, 120.72374],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_32afeec9a82e5b11c85b00abffc481c0.bindTooltip(
+                `<div>
+                     豐原｜總人流：2,536,672
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_8dff3e342e4aa3b997b78e965be7b894 = L.circleMarker(
+                [23.95947, 120.56977],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_8dff3e342e4aa3b997b78e965be7b894.bindTooltip(
+                `<div>
+                     員林｜總人流：2,406,896
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_f6dfc49b73daba9087ecc56ad3c7b503 = L.circleMarker(
+                [24.83919, 121.00946],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_f6dfc49b73daba9087ecc56ad3c7b503.bindTooltip(
+                `<div>
+                     竹北｜總人流：1,937,877
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_03e1f092b1bc67334115fddf2f36bf21 = L.circleMarker(
+                [25.09294, 121.71415],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_03e1f092b1bc67334115fddf2f36bf21.bindTooltip(
+                `<div>
+                     七堵｜總人流：1,931,767
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_7fcfc6ae27c4dc49f1c053183d143802 = L.circleMarker(
+                [24.86939, 120.99626],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_7fcfc6ae27c4dc49f1c053183d143802.bindTooltip(
+                `<div>
+                     新豐｜總人流：1,917,180
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_eada7afcfa959b75028bc1893aec578e = L.circleMarker(
+                [24.91939, 121.18363],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_eada7afcfa959b75028bc1893aec578e.bindTooltip(
+                `<div>
+                     埔心｜總人流：1,817,866
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_162cab51ad00c6406d8683684de87c3b = L.circleMarker(
+                [22.63145, 120.35745],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_162cab51ad00c6406d8683684de87c3b.bindTooltip(
+                `<div>
+                     鳳山｜總人流：1,795,402
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_130abf82031c98a5ccc36796c33aea3a = L.circleMarker(
+                [24.57001, 120.82233],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_130abf82031c98a5ccc36796c33aea3a.bindTooltip(
+                `<div>
+                     苗栗｜總人流：1,719,165
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_624627f3e8c286c5955f488ba0be7a3d = L.circleMarker(
+                [23.71184, 120.54099],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_624627f3e8c286c5955f488ba0be7a3d.bindTooltip(
+                `<div>
+                     斗六｜總人流：1,693,351
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_f65c4455a462a2793ebb8124928773f3 = L.circleMarker(
+                [22.79372, 121.1231],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_f65c4455a462a2793ebb8124928773f3.bindTooltip(
+                `<div>
+                     臺東｜總人流：1,673,489
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_9755a4cc9eb29a4c44e5d218c1773c55 = L.circleMarker(
+                [23.30673, 120.32307],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_9755a4cc9eb29a4c44e5d218c1773c55.bindTooltip(
+                `<div>
+                     新營｜總人流：1,611,812
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_f06274de4d142b1a4ebe336d5fb62af4 = L.circleMarker(
+                [24.91427, 121.14637],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_f06274de4d142b1a4ebe336d5fb62af4.bindTooltip(
+                `<div>
+                     楊梅｜總人流：1,596,714
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_f351ee7da0da71499a5767b9a41f7899 = L.circleMarker(
+                [25.03339, 121.49996],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_f351ee7da0da71499a5767b9a41f7899.bindTooltip(
+                `<div>
+                     萬華｜總人流：1,553,259
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_9e01c1a94bdefe5435b7b5ddfd3a2464 = L.circleMarker(
+                [25.10872, 121.80599],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_9e01c1a94bdefe5435b7b5ddfd3a2464.bindTooltip(
+                `<div>
+                     瑞芳｜總人流：1,513,891
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_6be6ee7c00c6f6343fb231a52f54ec8e = L.circleMarker(
+                [24.34448, 120.62702],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_6be6ee7c00c6f6343fb231a52f54ec8e.bindTooltip(
+                `<div>
+                     大甲｜總人流：1,453,055
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_488d118508d2384b5a96ad1b51534b03 = L.circleMarker(
+                [24.67791, 121.77464],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_488d118508d2384b5a96ad1b51534b03.bindTooltip(
+                `<div>
+                     羅東｜總人流：1,408,639
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_d802b40fd744afa3f282934b17918f6b = L.circleMarker(
+                [22.55008, 120.53604],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_d802b40fd744afa3f282934b17918f6b.bindTooltip(
+                `<div>
+                     潮州｜總人流：1,393,146
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_e027e3bb14beecbab7edabf81341d493 = L.circleMarker(
+                [24.80766, 121.03941],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_e027e3bb14beecbab7edabf81341d493.bindTooltip(
+                `<div>
+                     六家｜總人流：1,326,009
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_6c3af0640e90afb2435b228f84e25e28 = L.circleMarker(
+                [24.75457, 121.75803],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_6c3af0640e90afb2435b228f84e25e28.bindTooltip(
+                `<div>
+                     宜蘭｜總人流：1,239,455
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_dd2dac7e2a73c7818a457674040b2956 = L.circleMarker(
+                [24.90303, 121.04412],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_dd2dac7e2a73c7818a457674040b2956.bindTooltip(
+                `<div>
+                     湖口｜總人流：1,184,883
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_daa659134948212528e8964c93be9dc3 = L.circleMarker(
+                [23.01923, 120.22429],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_daa659134948212528e8964c93be9dc3.bindTooltip(
+                `<div>
+                     大橋｜總人流：1,149,819
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_6250063b77ecd02706d5f1a4899dbf32 = L.circleMarker(
+                [25.00419, 121.44477],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_6250063b77ecd02706d5f1a4899dbf32.bindTooltip(
+                `<div>
+                     浮洲｜總人流：1,086,797
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_bbbc5947aaa6e49ece62edae43a6e92d = L.circleMarker(
+                [22.92407, 120.28622],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_bbbc5947aaa6e49ece62edae43a6e92d.bindTooltip(
+                `<div>
+                     沙崙｜總人流：1,077,842
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_395ae63ce6fbbdb46bae71dde136c6d1 = L.circleMarker(
+                [23.13333, 120.30653],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_395ae63ce6fbbdb46bae71dde136c6d1.bindTooltip(
+                `<div>
+                     善化｜總人流：1,058,156
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_adecf58af6ece4c8ea67294fd38e4ae7 = L.circleMarker(
+                [24.11911, 120.64795],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_adecf58af6ece4c8ea67294fd38e4ae7.bindTooltip(
+                `<div>
+                     大慶｜總人流：1,012,961
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_3f04c805f80e7068e9f4d2756ecce14a = L.circleMarker(
+                [24.18035, 120.70193],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_3f04c805f80e7068e9f4d2756ecce14a.bindTooltip(
+                `<div>
+                     松竹｜總人流：997,385
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_aa30a7cf6f8788d044aa1207b88d751d = L.circleMarker(
+                [23.03825, 120.25347],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_aa30a7cf6f8788d044aa1207b88d751d.bindTooltip(
+                `<div>
+                     永康｜總人流：985,948
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_7fb69c812fcaed96ed87d19601f454c5 = L.circleMarker(
+                [22.79223, 120.30004],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_7fb69c812fcaed96ed87d19601f454c5.bindTooltip(
+                `<div>
+                     岡山｜總人流：985,305
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_910ab6a5b0c3b69518f3c0817e0a7f41 = L.circleMarker(
+                [24.23702, 120.55752],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_910ab6a5b0c3b69518f3c0817e0a7f41.bindTooltip(
+                `<div>
+                     沙鹿｜總人流：942,354
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_aea75f2cd1f71beb0f68b9f6d04fde42 = L.circleMarker(
+                [24.80875, 120.98381],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_aea75f2cd1f71beb0f68b9f6d04fde42.bindTooltip(
+                `<div>
+                     北新竹｜總人流：938,104
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_b85edcd60b997163f8c79d31ebda1b26 = L.circleMarker(
+                [24.56481, 120.70824],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_b85edcd60b997163f8c79d31ebda1b26.bindTooltip(
+                `<div>
+                     白沙屯｜總人流：909,299
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_8ecda7edfa6398aa25a2335f71aa975e = L.circleMarker(
+                [24.21214, 120.70564],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_8ecda7edfa6398aa25a2335f71aa975e.bindTooltip(
+                `<div>
+                     潭子｜總人流：821,397
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_3ba8714b99898726cd0339e6cba03ffb = L.circleMarker(
+                [25.07795, 121.69379],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_3ba8714b99898726cd0339e6cba03ffb.bindTooltip(
+                `<div>
+                     百福｜總人流：806,296
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_3b2ad259230e1a3783c1222a2277f1c4 = L.circleMarker(
+                [24.30933, 120.73288],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_3b2ad259230e1a3783c1222a2277f1c4.bindTooltip(
+                `<div>
+                     后里｜總人流：795,048
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_4ff01d6f67192832f0a82abd18022015 = L.circleMarker(
+                [23.85843, 120.59146],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_4ff01d6f67192832f0a82abd18022015.bindTooltip(
+                `<div>
+                     田中｜總人流：747,042
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_b14937db78d6230b3aac72c0de523926 = L.circleMarker(
+                [24.16449, 120.69988],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_b14937db78d6230b3aac72c0de523926.bindTooltip(
+                `<div>
+                     太原｜總人流：745,898
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_72239ef9c23ecfba2c68be03c7009a1d = L.circleMarker(
+                [24.97268, 121.33658],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_72239ef9c23ecfba2c68be03c7009a1d.bindTooltip(
+                `<div>
+                     鳳鳴｜總人流：739,029
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_a69f71a5a5866539d19170951335e09d = L.circleMarker(
+                [22.72696, 120.32425],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_a69f71a5a5866539d19170951335e09d.bindTooltip(
+                `<div>
+                     楠梓｜總人流：735,572
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_aefbae621d8c586a097dc88de663840a = L.circleMarker(
+                [24.78811, 121.02196],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_aefbae621d8c586a097dc88de663840a.bindTooltip(
+                `<div>
+                     新莊｜總人流：692,624
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_dc733e2268787f3707b75ad3e21ae202 = L.circleMarker(
+                [25.10838, 121.72904],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_dc733e2268787f3707b75ad3e21ae202.bindTooltip(
+                `<div>
+                     八堵｜總人流：688,435
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_4856a5033c33292506475b1bab01ba9a = L.circleMarker(
+                [25.07799, 121.66758],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_4856a5033c33292506475b1bab01ba9a.bindTooltip(
+                `<div>
+                     五堵｜總人流：687,061
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_f76995b69be8c5e3c518dd520813aaf4 = L.circleMarker(
+                [23.06823, 120.29004],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_f76995b69be8c5e3c518dd520813aaf4.bindTooltip(
+                `<div>
+                     新市｜總人流：685,744
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_b8a2894c2ef7aeb720209f438d1756fe = L.circleMarker(
+                [24.12877, 120.66654],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_b8a2894c2ef7aeb720209f438d1756fe.bindTooltip(
+                `<div>
+                     五權｜總人流：649,685
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_a79879b3f176464d18580584de2a76fa = L.circleMarker(
+                [23.55522, 120.43165],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_a79879b3f176464d18580584de2a76fa.bindTooltip(
+                `<div>
+                     民雄｜總人流：622,924
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_eb294964deaed71f7bf498bcd106fad5 = L.circleMarker(
+                [23.67257, 120.48089],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_eb294964deaed71f7bf498bcd106fad5.bindTooltip(
+                `<div>
+                     斗南｜總人流：618,621
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_f1aa7e06aae242e2d511fc9ebe353e72 = L.circleMarker(
+                [24.82703, 121.77535],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_f1aa7e06aae242e2d511fc9ebe353e72.bindTooltip(
+                `<div>
+                     礁溪｜總人流：609,536
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_1c92d4343fc40f0a0d8f28ac796d9c17 = L.circleMarker(
+                [24.93436, 121.08309],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_1c92d4343fc40f0a0d8f28ac796d9c17.bindTooltip(
+                `<div>
+                     富岡｜總人流：597,152
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_6024fb671b5add6d7a2849acc8f01126 = L.circleMarker(
+                [22.63709, 120.32603],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_6024fb671b5add6d7a2849acc8f01126.bindTooltip(
+                `<div>
+                     科工館｜總人流：589,746
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_ac4d1639396991db11a4d01e9de0966c = L.circleMarker(
+                [23.60089, 120.45597],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_ac4d1639396991db11a4d01e9de0966c.bindTooltip(
+                `<div>
+                     大林｜總人流：575,259
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_3b37168ace155ae2043ef5219aae935a = L.circleMarker(
+                [22.85404, 120.26619],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_3b37168ace155ae2043ef5219aae935a.bindTooltip(
+                `<div>
+                     路竹｜總人流：557,465
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_963621682295fee96655f0de07f43a15 = L.circleMarker(
+                [24.97273, 121.39254],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_963621682295fee96655f0de07f43a15.bindTooltip(
+                `<div>
+                     山佳｜總人流：540,465
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_982d2c0193dc237c19b08be064f10fac = L.circleMarker(
+                [24.44344, 120.65146],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_982d2c0193dc237c19b08be064f10fac.bindTooltip(
+                `<div>
+                     苑裡｜總人流：539,910
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_d8227df9506a50424cb6fb574b755f0b = L.circleMarker(
+                [22.93296, 120.23158],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_d8227df9506a50424cb6fb574b755f0b.bindTooltip(
+                `<div>
+                     保安｜總人流：528,749
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_f341f97a916e8c6bf7b5b19986808eb6 = L.circleMarker(
+                [22.87821, 120.25384],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_f341f97a916e8c6bf7b5b19986808eb6.bindTooltip(
+                `<div>
+                     大湖｜總人流：527,733
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_37da328ab861e94044aecca02b96ca7c = L.circleMarker(
+                [24.26364, 120.56918],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_37da328ab861e94044aecca02b96ca7c.bindTooltip(
+                `<div>
+                     清水｜總人流：512,219
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_29bd035a81eda69af19adac51a761a1c = L.circleMarker(
+                [24.14887, 120.69784],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_29bd035a81eda69af19adac51a761a1c.bindTooltip(
+                `<div>
+                     精武｜總人流：506,653
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_66eda4e402bd2ff55b199ab83d287e83 = L.circleMarker(
+                [22.65185, 120.28148],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_66eda4e402bd2ff55b199ab83d287e83.bindTooltip(
+                `<div>
+                     美術館｜總人流：477,549
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_3f539a6ced61dfab2dd747e6d160f2f9 = L.circleMarker(
+                [25.12305, 121.74202],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_3f539a6ced61dfab2dd747e6d160f2f9.bindTooltip(
+                `<div>
+                     三坑｜總人流：471,369
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_d84bbed73d8b31bdb36e7aae3f1ef461 = L.circleMarker(
+                [22.63425, 120.34245],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_d84bbed73d8b31bdb36e7aae3f1ef461.bindTooltip(
+                `<div>
+                     正義｜總人流：463,380
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_7408a08d25d8d5f1311137e5cc25343f = L.circleMarker(
+                [24.78731, 120.92844],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_7408a08d25d8d5f1311137e5cc25343f.bindTooltip(
+                `<div>
+                     三姓橋｜總人流：459,407
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_48187bdf285f98b7e7bb1bc335a60bff = L.circleMarker(
+                [24.98044, 121.40884],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_48187bdf285f98b7e7bb1bc335a60bff.bindTooltip(
+                `<div>
+                     南樹林｜總人流：459,317
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_05a179c4d623798039108e67e27bc863 = L.circleMarker(
+                [23.33155, 121.31172],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_05a179c4d623798039108e67e27bc863.bindTooltip(
+                `<div>
+                     玉里｜總人流：447,476
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_8fd527b1b14027bbed79728f3a826e09 = L.circleMarker(
+                [22.65641, 120.42089],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_8fd527b1b14027bbed79728f3a826e09.bindTooltip(
+                `<div>
+                     九曲堂｜總人流：438,349
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_a0ebc9333d3668b393b471281d9c1429 = L.circleMarker(
+                [23.10726, 120.30202],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_a0ebc9333d3668b393b471281d9c1429.bindTooltip(
+                `<div>
+                     南科｜總人流：437,852
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_df62e8a0d08e3e2c92224e8b622dc448 = L.circleMarker(
+                [22.76098, 120.31011],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_df62e8a0d08e3e2c92224e8b622dc448.bindTooltip(
+                `<div>
+                     橋頭｜總人流：419,355
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_f9fc36519d59672355fb3cfd0a613ad2 = L.circleMarker(
+                [24.02502, 120.53742],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_f9fc36519d59672355fb3cfd0a613ad2.bindTooltip(
+                `<div>
+                     花壇｜總人流：409,640
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_a295deb5087837980d3e2e246c32edce = L.circleMarker(
+                [23.19271, 120.31917],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_a295deb5087837980d3e2e246c32edce.bindTooltip(
+                `<div>
+                     隆田｜總人流：396,318
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_7e73f31991fd457fdb8a016a49ab4fc7 = L.circleMarker(
+                [23.81321, 120.61805],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_7e73f31991fd457fdb8a016a49ab4fc7.bindTooltip(
+                `<div>
+                     二水｜總人流：384,351
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_7e7fdd9a5523ddaae36089440d06e2d3 = L.circleMarker(
+                [22.36802, 120.59511],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_7e7fdd9a5523ddaae36089440d06e2d3.bindTooltip(
+                `<div>
+                     枋寮｜總人流：376,100
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_f2547a839ffc1ab6dc7cc32deb032b8b = L.circleMarker(
+                [24.49141, 120.67843],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_f2547a839ffc1ab6dc7cc32deb032b8b.bindTooltip(
+                `<div>
+                     通霄｜總人流：373,321
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_90b207debe87e84334ce00dc5a02830b = L.circleMarker(
+                [24.61621, 120.78731],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_90b207debe87e84334ce00dc5a02830b.bindTooltip(
+                `<div>
+                     後龍｜總人流：372,263
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_0f820a49bb342538b0bc002fb4e2709a = L.circleMarker(
+                [24.60429, 120.82637],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_0f820a49bb342538b0bc002fb4e2709a.bindTooltip(
+                `<div>
+                     豐富｜總人流：365,182
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_1cce6013d04cb778af15f84ec48f2927 = L.circleMarker(
+                [23.89573, 120.58077],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_1cce6013d04cb778af15f84ec48f2927.bindTooltip(
+                `<div>
+                     社頭｜總人流：350,975
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_8a2013b3546535f7ef248d15b2c37e93 = L.circleMarker(
+                [24.92218, 121.05575],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_8a2013b3546535f7ef248d15b2c37e93.bindTooltip(
+                `<div>
+                     北湖｜總人流：341,960
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_b5d5e870ddd548b44ac05ade8d5eba48 = L.circleMarker(
+                [24.85898, 121.82258],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_b5d5e870ddd548b44ac05ade8d5eba48.bindTooltip(
+                `<div>
+                     頭城｜總人流：339,194
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_73329d90ee6c972e7c6add4a71b71434 = L.circleMarker(
+                [22.66589, 120.28701],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_73329d90ee6c972e7c6add4a71b71434.bindTooltip(
+                `<div>
+                     內惟｜總人流：334,317
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_f20f3b016d6edf6e92867373c2ab8528 = L.circleMarker(
+                [24.23461, 120.7106],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_f20f3b016d6edf6e92867373c2ab8528.bindTooltip(
+                `<div>
+                     栗林｜總人流：328,769
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_2f2184f41109cd60aa390a508445b0c2 = L.circleMarker(
+                [22.61637, 120.52649],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_2f2184f41109cd60aa390a508445b0c2.bindTooltip(
+                `<div>
+                     西勢｜總人流：328,536
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_bb04adc989829231f8564dbdf1b8638e = L.circleMarker(
+                [24.11424, 120.59021],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_bb04adc989829231f8564dbdf1b8638e.bindTooltip(
+                `<div>
+                     成功｜總人流：319,202
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_029cb2575fe376e292b91bc4151068e3 = L.circleMarker(
+                [25.01595, 121.94471],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_029cb2575fe376e292b91bc4151068e3.bindTooltip(
+                `<div>
+                     福隆｜總人流：307,834
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_baf51f123666301e5c4921675c932f16 = L.circleMarker(
+                [24.78145, 121.03141],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_baf51f123666301e5c4921675c932f16.bindTooltip(
+                `<div>
+                     竹中｜總人流：297,475
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_f0811b63b21a947ebe4dc0b712eb8c08 = L.circleMarker(
+                [22.63879, 120.31494],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_f0811b63b21a947ebe4dc0b712eb8c08.bindTooltip(
+                `<div>
+                     民族｜總人流：296,384
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_dfccf8a4cee914ea32b1cbb044e57bc5 = L.circleMarker(
+                [25.04111, 121.77514],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_dfccf8a4cee914ea32b1cbb044e57bc5.bindTooltip(
+                `<div>
+                     十分｜總人流：289,844
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_180a27c9885a2f3e23b55c8af2eef039 = L.circleMarker(
+                [24.48634, 120.78617],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_180a27c9885a2f3e23b55c8af2eef039.bindTooltip(
+                `<div>
+                     銅鑼｜總人流：285,365
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_237733069cb3d9aeb48f75413be96bf7 = L.circleMarker(
+                [23.99002, 120.56062],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_237733069cb3d9aeb48f75413be96bf7.bindTooltip(
+                `<div>
+                     大村｜總人流：281,228
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_3c1b35b13ec3424105cefd70234e31cc = L.circleMarker(
+                [24.15417, 120.54249],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_3c1b35b13ec3424105cefd70234e31cc.bindTooltip(
+                `<div>
+                     大肚｜總人流：268,875
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_d474ddbfe459c4e7eaa9a961cb5b6a8c = L.circleMarker(
+                [22.67445, 120.29401],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_d474ddbfe459c4e7eaa9a961cb5b6a8c.bindTooltip(
+                `<div>
+                     左營｜總人流：257,859
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_908042fbfcb221ed3eabde223d03639b = L.circleMarker(
+                [24.19572, 120.70398],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_908042fbfcb221ed3eabde223d03639b.bindTooltip(
+                `<div>
+                     頭家厝｜總人流：254,296
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_eb490f1f819a34e296e6beda267e6822 = L.circleMarker(
+                [23.75967, 120.61499],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_eb490f1f819a34e296e6beda267e6822.bindTooltip(
+                `<div>
+                     林內｜總人流：253,165
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_6fe9983e5b210d35ddd3b2b85ae5c612 = L.circleMarker(
+                [25.03851, 121.86654],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_6fe9983e5b210d35ddd3b2b85ae5c612.bindTooltip(
+                `<div>
+                     雙溪｜總人流：253,012
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_9c76053d0b99772ee56d0f738f7640a4 = L.circleMarker(
+                [22.92354, 120.24054],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_9c76053d0b99772ee56d0f738f7640a4.bindTooltip(
+                `<div>
+                     仁德｜總人流：251,147
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_766a12a3e0d21b6b0939bf7af4f09c02 = L.circleMarker(
+                [24.42066, 120.77393],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_766a12a3e0d21b6b0939bf7af4f09c02.bindTooltip(
+                `<div>
+                     三義｜總人流：245,369
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_10dbab0235ed1b71edca7acabfde8072 = L.circleMarker(
+                [25.10281, 121.76195],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_10dbab0235ed1b71edca7acabfde8072.bindTooltip(
+                `<div>
+                     四腳亭｜總人流：239,456
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_d810818b371c809ffa49cecf6a124d4b = L.circleMarker(
+                [23.49981, 120.44851],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_d810818b371c809ffa49cecf6a124d4b.bindTooltip(
+                `<div>
+                     嘉北｜總人流：234,635
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_0c8ea45f2bcaf7bd8c8c44787fab97fd = L.circleMarker(
+                [22.64016, 120.39131],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_0c8ea45f2bcaf7bd8c8c44787fab97fd.bindTooltip(
+                `<div>
+                     後庄｜總人流：226,814
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_b44f987390fc9d12b84abfdffba7c962 = L.circleMarker(
+                [22.71022, 121.06068],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_b44f987390fc9d12b84abfdffba7c962.bindTooltip(
+                `<div>
+                     知本｜總人流：226,217
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_3c46b5033e6f9548b3ca4230926279cc = L.circleMarker(
+                [23.49738, 121.37684],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_3c46b5033e6f9548b3ca4230926279cc.bindTooltip(
+                `<div>
+                     瑞穗｜總人流：225,917
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_e02f16bbe6dbad9d17e2c1368ce84136 = L.circleMarker(
+                [22.63931, 120.29414],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_e02f16bbe6dbad9d17e2c1368ce84136.bindTooltip(
+                `<div>
+                     三塊厝｜總人流：225,574
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_9fd044d06dbee3e5345a384939efb2ca = L.circleMarker(
+                [23.12613, 121.21949],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_9fd044d06dbee3e5345a384939efb2ca.bindTooltip(
+                `<div>
+                     池上｜總人流：218,443
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_d4bf106443c1894fa5b1bb2d0ebea5d5 = L.circleMarker(
+                [24.46342, 121.80103],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_d4bf106443c1894fa5b1bb2d0ebea5d5.bindTooltip(
+                `<div>
+                     南澳｜總人流：212,231
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_e0d32d668e65f46b09709e8642ee1105 = L.circleMarker(
+                [24.10867, 120.62244],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_e0d32d668e65f46b09709e8642ee1105.bindTooltip(
+                `<div>
+                     烏日｜總人流：211,871
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_91077d9dafb65a7006f31dba7d9d13e6 = L.circleMarker(
+                [24.73823, 121.09472],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_91077d9dafb65a7006f31dba7d9d13e6.bindTooltip(
+                `<div>
+                     竹東｜總人流：210,679
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_1a191e9a02eca798c4e4262910551b34 = L.circleMarker(
+                [23.96823, 121.58266],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_1a191e9a02eca798c4e4262910551b34.bindTooltip(
+                `<div>
+                     吉安｜總人流：210,306
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_bcb76adf6f0e2038ac873730c5f12df5 = L.circleMarker(
+                [24.60852, 121.82735],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_bcb76adf6f0e2038ac873730c5f12df5.bindTooltip(
+                `<div>
+                     蘇澳新｜總人流：209,731
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_8e0c3d0c9aba9a899ae39f53b379cca7 = L.circleMarker(
+                [24.76311, 120.91388],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_8e0c3d0c9aba9a899ae39f53b379cca7.bindTooltip(
+                `<div>
+                     香山｜總人流：208,376
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_a638a4f1ef0c51d0ec595e616bcfdb0b = L.circleMarker(
+                [24.19748, 120.54335],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_a638a4f1ef0c51d0ec595e616bcfdb0b.bindTooltip(
+                `<div>
+                     龍井｜總人流：204,619
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_5352e4dc808455f649bcfed495ee8ba4 = L.circleMarker(
+                [23.43398, 120.39971],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_5352e4dc808455f649bcfed495ee8ba4.bindTooltip(
+                `<div>
+                     水上｜總人流：202,396
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_baae248b70a7b005f9136154c003a83b = L.circleMarker(
+                [22.53161, 120.96721],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_baae248b70a7b005f9136154c003a83b.bindTooltip(
+                `<div>
+                     金崙｜總人流：199,826
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_65c37831c2a3cb9cf5e377c3f06c4498 = L.circleMarker(
+                [22.64181, 120.28071],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_65c37831c2a3cb9cf5e377c3f06c4498.bindTooltip(
+                `<div>
+                     鼓山｜總人流：197,524
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_8ab9d21a3cb1e85273a64778f26ab738 = L.circleMarker(
+                [24.29839, 121.75344],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_8ab9d21a3cb1e85273a64778f26ab738.bindTooltip(
+                `<div>
+                     和平｜總人流：196,325
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_df635d26ed360c5077b4707e807a621b = L.circleMarker(
+                [23.04566, 121.1643],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_df635d26ed360c5077b4707e807a621b.bindTooltip(
+                `<div>
+                     關山｜總人流：195,162
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_c594146b161a56f45b7d0652c7d6ef69 = L.circleMarker(
+                [24.33146, 120.74181],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_c594146b161a56f45b7d0652c7d6ef69.bindTooltip(
+                `<div>
+                     泰安｜總人流：193,864
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_e02b3ef3653ff163bdf65141f44c5df7 = L.circleMarker(
+                [23.36626, 120.36058],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_e02b3ef3653ff163bdf65141f44c5df7.bindTooltip(
+                `<div>
+                     後壁｜總人流：193,059
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_559e402e1c063871e86b0432555d52e0 = L.circleMarker(
+                [24.12051, 120.57018],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_559e402e1c063871e86b0432555d52e0.bindTooltip(
+                `<div>
+                     追分｜總人流：191,172
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_2ffc8d69388c9e5a8eece374433b2dba = L.circleMarker(
+                [23.66631, 121.42117],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_2ffc8d69388c9e5a8eece374433b2dba.bindTooltip(
+                `<div>
+                     光復｜總人流：190,510
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_3a95b92798c83bce131a681ac52f7c81 = L.circleMarker(
+                [23.92808, 120.57173],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_3a95b92798c83bce131a681ac52f7c81.bindTooltip(
+                `<div>
+                     永靖｜總人流：189,719
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_ef9874b8c73b000f5a89206c08c2f3b6 = L.circleMarker(
+                [23.27762, 120.32252],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_ef9874b8c73b000f5a89206c08c2f3b6.bindTooltip(
+                `<div>
+                     柳營｜總人流：185,274
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_4662b2688fa719c325221b5e7f442d27 = L.circleMarker(
+                [22.43135, 120.51529],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_4662b2688fa719c325221b5e7f442d27.bindTooltip(
+                `<div>
+                     林邊｜總人流：182,664
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_baa48ae38e2f5ca167e21d2d010b99b6 = L.circleMarker(
+                [25.08702, 121.82743],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_baa48ae38e2f5ca167e21d2d010b99b6.bindTooltip(
+                `<div>
+                     猴硐｜總人流：179,878
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_f8d986fe072e46b6d403a4054905cfc4 = L.circleMarker(
+                [22.49207, 120.51174],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_f8d986fe072e46b6d403a4054905cfc4.bindTooltip(
+                `<div>
+                     南州｜總人流：179,314
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_99b8664419aa3bd86d7ff13b7975e96f = L.circleMarker(
+                [24.63633, 121.79211],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_99b8664419aa3bd86d7ff13b7975e96f.bindTooltip(
+                `<div>
+                     冬山｜總人流：173,952
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_0104cf058f5142faeb04f6878c132bc9 = L.circleMarker(
+                [23.24259, 120.32107],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_0104cf058f5142faeb04f6878c132bc9.bindTooltip(
+                `<div>
+                     林鳳營｜總人流：171,499
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_617d746d9b7aed02739a18f3a8fb5390 = L.circleMarker(
+                [25.10231, 121.74031],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_617d746d9b7aed02739a18f3a8fb5390.bindTooltip(
+                `<div>
+                     暖暖｜總人流：170,190
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_4ca706062647852829d2148fbfbb6308 = L.circleMarker(
+                [24.70535, 121.18255],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_4ca706062647852829d2148fbfbb6308.bindTooltip(
+                `<div>
+                     內灣｜總人流：147,758
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_9909231b273e76c06e9c8e0abdc76cde = L.circleMarker(
+                [24.59516, 121.85143],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_9909231b273e76c06e9c8e0abdc76cde.bindTooltip(
+                `<div>
+                     蘇澳｜總人流：144,825
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_20a586ee401b05b508e6028f88952988 = L.circleMarker(
+                [22.90729, 120.27263],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_20a586ee401b05b508e6028f88952988.bindTooltip(
+                `<div>
+                     長榮大學｜總人流：136,855
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_2abe9ca727c15da2635230b8f4255436 = L.circleMarker(
+                [24.93109, 121.06751],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_2abe9ca727c15da2635230b8f4255436.bindTooltip(
+                `<div>
+                     新富｜總人流：135,797
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_3cf26fad430b39bf608faee5ee44fa00 = L.circleMarker(
+                [24.37815, 120.65412],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_3cf26fad430b39bf608faee5ee44fa00.bindTooltip(
+                `<div>
+                     日南｜總人流：133,843
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_234f0559d655b35a48614e6b281e626f = L.circleMarker(
+                [23.74634, 121.44701],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_234f0559d655b35a48614e6b281e626f.bindTooltip(
+                `<div>
+                     鳳林｜總人流：132,024
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_3b4a9c1fb3f7fd6984a7ce912562a3e6 = L.circleMarker(
+                [24.12756, 121.64086],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_3b4a9c1fb3f7fd6984a7ce912562a3e6.bindTooltip(
+                `<div>
+                     新城｜總人流：123,582
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_1b3c5e29192c1f64d699d8109a072d26 = L.circleMarker(
+                [24.64186, 120.86721],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_1b3c5e29192c1f64d699d8109a072d26.bindTooltip(
+                `<div>
+                     造橋｜總人流：123,161
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_91966dd26a5bb9c60f18107e414c791a = L.circleMarker(
+                [22.58658, 120.53978],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_91966dd26a5bb9c60f18107e414c791a.bindTooltip(
+                `<div>
+                     竹田｜總人流：119,696
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_3cc245430a08a724e49c9968f2f80413 = L.circleMarker(
+                [24.80657, 121.0034],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_3cc245430a08a724e49c9968f2f80413.bindTooltip(
+                `<div>
+                     千甲｜總人流：118,792
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_9908ddf1a2cdf39e4fd1732b1fbd23ed = L.circleMarker(
+                [23.90769, 121.5295],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_9908ddf1a2cdf39e4fd1732b1fbd23ed.bindTooltip(
+                `<div>
+                     志學｜總人流：117,052
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_9cddbe10b094de597372ce509b232dd3 = L.circleMarker(
+                [22.90446, 120.25284],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_9cddbe10b094de597372ce509b232dd3.bindTooltip(
+                `<div>
+                     中洲｜總人流：116,528
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_d33b2b50ad09a2c50f3463ae8e1c9248 = L.circleMarker(
+                [23.86901, 121.51064],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_d33b2b50ad09a2c50f3463ae8e1c9248.bindTooltip(
+                `<div>
+                     壽豐｜總人流：115,891
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_2b1ae20200016b640d930152467636b2 = L.circleMarker(
+                [24.72291, 120.87183],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_2b1ae20200016b640d930152467636b2.bindTooltip(
+                `<div>
+                     崎頂｜總人流：107,793
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_0fb2c7148301ea68483c9f269d7a2970 = L.circleMarker(
+                [22.65246, 120.50263],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_0fb2c7148301ea68483c9f269d7a2970.bindTooltip(
+                `<div>
+                     歸來｜總人流：104,135
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_f851cf7167990f7985a214e69e6a1423 = L.circleMarker(
+                [24.96677, 121.92253],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_f851cf7167990f7985a214e69e6a1423.bindTooltip(
+                `<div>
+                     大里｜總人流：81,720
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_546121d80471601ac96e19f54c65ded3 = L.circleMarker(
+                [24.30441, 120.60231],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_546121d80471601ac96e19f54c65ded3.bindTooltip(
+                `<div>
+                     臺中港｜總人流：81,627
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_be39b217ff66368726567028a1d0d1ab = L.circleMarker(
+                [23.82647, 120.78495],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_be39b217ff66368726567028a1d0d1ab.bindTooltip(
+                `<div>
+                     集集｜總人流：81,232
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_ecca4769c93d21643d7041fe5d99fde3 = L.circleMarker(
+                [22.63481, 120.51432],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_ecca4769c93d21643d7041fe5d99fde3.bindTooltip(
+                `<div>
+                     麟洛｜總人流：77,249
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_1996da2a124629f4cf7d1f2fc1d7a40d = L.circleMarker(
+                [23.73167, 120.57998],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_1996da2a124629f4cf7d1f2fc1d7a40d.bindTooltip(
+                `<div>
+                     石榴｜總人流：73,414
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_c0fd31a9550fb0c44ec05b6a0fc48a6c = L.circleMarker(
+                [24.74839, 121.08319],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_c0fd31a9550fb0c44ec05b6a0fc48a6c.bindTooltip(
+                `<div>
+                     榮華｜總人流：73,212
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_b011172e4eea8c9387ab48f97fd89d85 = L.circleMarker(
+                [22.36526, 120.90094],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_b011172e4eea8c9387ab48f97fd89d85.bindTooltip(
+                `<div>
+                     大武｜總人流：72,441
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_88aa51cfb2df3791c73448e644b16cf0 = L.circleMarker(
+                [22.91249, 121.13701],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_88aa51cfb2df3791c73448e644b16cf0.bindTooltip(
+                `<div>
+                     鹿野｜總人流：72,035
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_316399dded8946c99da2c02ab4afbb15 = L.circleMarker(
+                [25.05871, 121.85197],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_316399dded8946c99da2c02ab4afbb15.bindTooltip(
+                `<div>
+                     牡丹｜總人流：71,032
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_c597cd46bf77b60d8cdbac36e20c052a = L.circleMarker(
+                [22.41409, 120.54774],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_c597cd46bf77b60d8cdbac36e20c052a.bindTooltip(
+                `<div>
+                     佳冬｜總人流：67,242
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_d86475311f318a45a40c3d940e36821a = L.circleMarker(
+                [23.41344, 120.38654],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_d86475311f318a45a40c3d940e36821a.bindTooltip(
+                `<div>
+                     南靖｜總人流：63,876
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_244a29a02b89474dbbef7ef5f997a772 = L.circleMarker(
+                [22.61883, 121.00492],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_244a29a02b89474dbbef7ef5f997a772.bindTooltip(
+                `<div>
+                     太麻里｜總人流：63,572
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_2bcc0ab5b12b458cb3ae9c24bbe68aa0 = L.circleMarker(
+                [23.17924, 121.24864],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_2bcc0ab5b12b458cb3ae9c24bbe68aa0.bindTooltip(
+                `<div>
+                     富里｜總人流：62,816
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_a6c7d2d3ef3a859bfc9b0e4ca5abf603 = L.circleMarker(
+                [24.93836, 121.88983],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_a6c7d2d3ef3a859bfc9b0e4ca5abf603.bindTooltip(
+                `<div>
+                     大溪｜總人流：62,534
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_07d23f9aff1c69c6365c5cfd4eb0a201 = L.circleMarker(
+                [25.02571, 121.74019],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_07d23f9aff1c69c6365c5cfd4eb0a201.bindTooltip(
+                `<div>
+                     平溪｜總人流：62,466
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_a6ca60db6f6d393664d5d72335b6d426 = L.circleMarker(
+                [24.72041, 121.11772],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_a6ca60db6f6d393664d5d72335b6d426.bindTooltip(
+                `<div>
+                     橫山｜總人流：61,760
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_c8eb0bddc692a3cf1bd758d7c86786f8 = L.circleMarker(
+                [25.02197, 121.90879],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_c8eb0bddc692a3cf1bd758d7c86786f8.bindTooltip(
+                `<div>
+                     貢寮｜總人流：56,590
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_1d0f382022c887f2433860702c404578 = L.circleMarker(
+                [25.06555, 121.82257],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_1d0f382022c887f2433860702c404578.bindTooltip(
+                `<div>
+                     三貂嶺｜總人流：56,300
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_33fa1568429d5d47f6139868da6914fe = L.circleMarker(
+                [25.02391, 121.72391],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_33fa1568429d5d47f6139868da6914fe.bindTooltip(
+                `<div>
+                     菁桐｜總人流：55,978
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_e6abd77b100536273123d769298d9a0a = L.circleMarker(
+                [23.17284, 120.32125],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_e6abd77b100536273123d769298d9a0a.bindTooltip(
+                `<div>
+                     拔林｜總人流：55,875
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_ac3051f03f43fcbfa01036b5388e42f4 = L.circleMarker(
+                [24.54018, 120.69518],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_ac3051f03f43fcbfa01036b5388e42f4.bindTooltip(
+                `<div>
+                     新埔｜總人流：54,987
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_bb88d6f4e347523786b57075cd617aba = L.circleMarker(
+                [24.03253, 121.60166],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_bb88d6f4e347523786b57075cd617aba.bindTooltip(
+                `<div>
+                     北埔｜總人流：54,654
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_f2b1d948bdb2db34007e82dc735cb5c2 = L.circleMarker(
+                [22.51311, 120.51481],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_f2b1d948bdb2db34007e82dc735cb5c2.bindTooltip(
+                `<div>
+                     崁頂｜總人流：51,286
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_f2d02997b7efeb0cb1f72fe0aeea33ec = L.circleMarker(
+                [24.52246, 120.79154],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_f2d02997b7efeb0cb1f72fe0aeea33ec.bindTooltip(
+                `<div>
+                     南勢｜總人流：50,137
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_7f2399057764d11429808e62e12d61ec = L.circleMarker(
+                [24.51827, 121.83072],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_7f2399057764d11429808e62e12d61ec.bindTooltip(
+                `<div>
+                     東澳｜總人流：48,299
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_d19a32fd90bd4f6f803854624876807e = L.circleMarker(
+                [22.66597, 120.46497],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_d19a32fd90bd4f6f803854624876807e.bindTooltip(
+                `<div>
+                     六塊厝｜總人流：47,155
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_14267403d9eb89b0e60e74700118d41b = L.circleMarker(
+                [25.13528, 121.80286],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_14267403d9eb89b0e60e74700118d41b.bindTooltip(
+                `<div>
+                     八斗子｜總人流：45,047
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_f7adb513dcf79fc89c4a81ae83048ae4 = L.circleMarker(
+                [24.70528, 121.77409],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_f7adb513dcf79fc89c4a81ae83048ae4.bindTooltip(
+                `<div>
+                     二結｜總人流：44,485
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_fe07d6c7177a3d9b8245d9203cc653e3 = L.circleMarker(
+                [23.63951, 120.47106],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_fe07d6c7177a3d9b8245d9203cc653e3.bindTooltip(
+                `<div>
+                     石龜｜總人流：41,323
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_9e658e973f7e966ab40929f4fedd9091 = L.circleMarker(
+                [22.39897, 120.57236],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_9e658e973f7e966ab40929f4fedd9091.bindTooltip(
+                `<div>
+                     東海｜總人流：39,338
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_0288599b48b86478f6c50cb7ff405135 = L.circleMarker(
+                [24.78681, 121.76271],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_0288599b48b86478f6c50cb7ff405135.bindTooltip(
+                `<div>
+                     四城｜總人流：37,874
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_94ea239b81ebc4c1574071e0d9ae792a = L.circleMarker(
+                [23.83263, 120.86572],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_94ea239b81ebc4c1574071e0d9ae792a.bindTooltip(
+                `<div>
+                     車埕｜總人流：33,734
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_a28a60814deffd6f72ce06026197ee95 = L.circleMarker(
+                [24.88375, 121.84572],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_a28a60814deffd6f72ce06026197ee95.bindTooltip(
+                `<div>
+                     外澳｜總人流：33,126
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_52e5ff75fa8e6a2ba210c876cd945d13 = L.circleMarker(
+                [24.84391, 121.80913],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_52e5ff75fa8e6a2ba210c876cd945d13.bindTooltip(
+                `<div>
+                     頂埔｜總人流：31,190
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_d449d12e129ca9f43d509b75f7587b96 = L.circleMarker(
+                [23.83467, 120.70467],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_d449d12e129ca9f43d509b75f7587b96.bindTooltip(
+                `<div>
+                     濁水｜總人流：30,704
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_59b47b114c93e3f6b5ec57d060a75108 = L.circleMarker(
+                [24.61169, 120.75812],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_59b47b114c93e3f6b5ec57d060a75108.bindTooltip(
+                `<div>
+                     龍港｜總人流：28,693
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_a6620ea9fb525cd3d3505a89c7a00123 = L.circleMarker(
+                [24.77776, 121.05582],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_a6620ea9fb525cd3d3505a89c7a00123.bindTooltip(
+                `<div>
+                     上員｜總人流：26,817
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_a6d79221c4f0a9f520ed4de3732b20ab = L.circleMarker(
+                [24.90484, 121.8689],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_a6d79221c4f0a9f520ed4de3732b20ab.bindTooltip(
+                `<div>
+                     龜山｜總人流：26,028
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_7e8574ba6e0a367eb48847e4619b985f = L.circleMarker(
+                [24.64565, 120.80376],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_7e8574ba6e0a367eb48847e4619b985f.bindTooltip(
+                `<div>
+                     大山｜總人流：25,817
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_8b604e1dde48185e21c3fd9bd4ce6698 = L.circleMarker(
+                [23.79845, 120.64211],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_8b604e1dde48185e21c3fd9bd4ce6698.bindTooltip(
+                `<div>
+                     源泉｜總人流：23,974
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_fb659dc60b702b8a741f76dd9e7080af = L.circleMarker(
+                [23.81845, 120.85332],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_fb659dc60b702b8a741f76dd9e7080af.bindTooltip(
+                `<div>
+                     水里｜總人流：21,692
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_d3d9920115165967091b771cd91f41ad = L.circleMarker(
+                [24.71551, 121.16743],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_d3d9920115165967091b771cd91f41ad.bindTooltip(
+                `<div>
+                     富貴｜總人流：21,049
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_b5d9cb1cbe09f74717f6f2ab66043805 = L.circleMarker(
+                [24.65641, 120.85825],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_b5d9cb1cbe09f74717f6f2ab66043805.bindTooltip(
+                `<div>
+                     談文｜總人流：19,582
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_b32cf495750c6d7627c2f918cfb15700 = L.circleMarker(
+                [25.13754, 121.79997],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_b32cf495750c6d7627c2f918cfb15700.bindTooltip(
+                `<div>
+                     海科館｜總人流：19,126
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_ad424b597e7a3924d0ec6c387214159c = L.circleMarker(
+                [24.71667, 121.15437],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_ad424b597e7a3924d0ec6c387214159c.bindTooltip(
+                `<div>
+                     合興｜總人流：17,108
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_8b8139059bef5f5fb20fe6d31dcff912 = L.circleMarker(
+                [24.72062, 121.13622],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_8b8139059bef5f5fb20fe6d31dcff912.bindTooltip(
+                `<div>
+                     九讚頭｜總人流：16,518
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_acf6b662a11c63f67cb315edc99ec5c1 = L.circleMarker(
+                [23.71199, 121.41907],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_acf6b662a11c63f67cb315edc99ec5c1.bindTooltip(
+                `<div>
+                     萬榮｜總人流：16,496
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_5ce3fa3151d15aefff58fea6158d05fe = L.circleMarker(
+                [23.84842, 121.49618],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_5ce3fa3151d15aefff58fea6158d05fe.bindTooltip(
+                `<div>
+                     豐田｜總人流：15,662
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_63bbbdb9c173320e0aa7d0570a83272a = L.circleMarker(
+                [24.69415, 121.77526],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_63bbbdb9c173320e0aa7d0570a83272a.bindTooltip(
+                `<div>
+                     中里｜總人流：14,176
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_d4dfc49866f763eb9b2b87d6d527954e = L.circleMarker(
+                [23.58031, 121.38008],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_d4dfc49866f763eb9b2b87d6d527954e.bindTooltip(
+                `<div>
+                     富源｜總人流：13,397
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_be36c175619a416c867b35ceafe13d05 = L.circleMarker(
+                [22.33085, 120.62445],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_be36c175619a416c867b35ceafe13d05.bindTooltip(
+                `<div>
+                     加祿｜總人流：13,084
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_38171cae5c16df74630461828a0de1f5 = L.circleMarker(
+                [22.45794, 120.51129],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_38171cae5c16df74630461828a0de1f5.bindTooltip(
+                `<div>
+                     鎮安｜總人流：12,123
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_47bf6159fba90940ffe4b4a723134bf8 = L.circleMarker(
+                [22.95604, 121.15901],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_47bf6159fba90940ffe4b4a723134bf8.bindTooltip(
+                `<div>
+                     瑞源｜總人流：11,826
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_4203bd8e86623623105c1074fc8fc919 = L.circleMarker(
+                [24.24225, 121.71182],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_4203bd8e86623623105c1074fc8fc919.bindTooltip(
+                `<div>
+                     和仁｜總人流：11,776
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_d5864c2ab453cc742aac1f843ee6ca76 = L.circleMarker(
+                [24.97832, 121.94507],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_d5864c2ab453cc742aac1f843ee6ca76.bindTooltip(
+                `<div>
+                     石城｜總人流：9,674
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_9bfef34f6b82068ecd241ff04318034f = L.circleMarker(
+                [25.03016, 121.74795],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_9bfef34f6b82068ecd241ff04318034f.bindTooltip(
+                `<div>
+                     嶺腳｜總人流：9,252
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_2d314b6d6c3ce3e060cf7ce567e6beab = L.circleMarker(
+                [23.80176, 121.46169],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_2d314b6d6c3ce3e060cf7ce567e6beab.bindTooltip(
+                `<div>
+                     林榮新光｜總人流：8,471
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_d8e7c537c4b73c27efdf7faf1261509f = L.circleMarker(
+                [22.46102, 120.94176],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_d8e7c537c4b73c27efdf7faf1261509f.bindTooltip(
+                `<div>
+                     瀧溪｜總人流：8,220
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_4ae3771d313803fb43608a57058154f0 = L.circleMarker(
+                [22.76426, 121.09356],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_4ae3771d313803fb43608a57058154f0.bindTooltip(
+                `<div>
+                     康樂｜總人流：7,253
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_74f63ea09a553a0c0f1a8967ce6ae2b3 = L.circleMarker(
+                [23.78231, 121.45824],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_74f63ea09a553a0c0f1a8967ce6ae2b3.bindTooltip(
+                `<div>
+                     南平｜總人流：6,806
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_65bc0f301f5776e2d02b447051ee908f = L.circleMarker(
+                [24.17199, 121.65536],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_65bc0f301f5776e2d02b447051ee908f.bindTooltip(
+                `<div>
+                     崇德｜總人流：6,799
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_dc27e913c45c5ad9edc3f0b178aad9fa = L.circleMarker(
+                [25.03445, 121.76349],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_dc27e913c45c5ad9edc3f0b178aad9fa.bindTooltip(
+                `<div>
+                     望古｜總人流：6,294
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_1a70703f737bf0c001fd0fddea49b5ce = L.circleMarker(
+                [23.83521, 120.75014],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_1a70703f737bf0c001fd0fddea49b5ce.bindTooltip(
+                `<div>
+                     龍泉｜總人流：5,407
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_98a52b8bef732d964654ea4939bd74a8 = L.circleMarker(
+                [23.88279, 121.52045],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_98a52b8bef732d964654ea4939bd74a8.bindTooltip(
+                `<div>
+                     平和｜總人流：4,966
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_ae919a03c0f91fdf22a656c09f60140a = L.circleMarker(
+                [23.42458, 121.34539],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_ae919a03c0f91fdf22a656c09f60140a.bindTooltip(
+                `<div>
+                     三民｜總人流：3,997
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_e50898d487845be34bc97a61795f6605 = L.circleMarker(
+                [25.04998, 121.79732],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_e50898d487845be34bc97a61795f6605.bindTooltip(
+                `<div>
+                     大華｜總人流：3,759
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_81af1102c46359d6bc03ebcc2e0707c5 = L.circleMarker(
+                [24.09041, 121.61095],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_81af1102c46359d6bc03ebcc2e0707c5.bindTooltip(
+                `<div>
+                     景美｜總人流：3,640
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_ac13c6bb1ae2b6b29871a5d266324c04 = L.circleMarker(
+                [23.27234, 121.30418],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_ac13c6bb1ae2b6b29871a5d266324c04.bindTooltip(
+                `<div>
+                     東里｜總人流：3,525
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_4a3294e668b3f4839353ea19d7de3e1a = L.circleMarker(
+                [24.56843, 121.84458],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_4a3294e668b3f4839353ea19d7de3e1a.bindTooltip(
+                `<div>
+                     永樂｜總人流：3,449
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_3c047fce95de0d719daabbbf4a3dad09 = L.circleMarker(
+                [24.44879, 121.77601],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_3c047fce95de0d719daabbbf4a3dad09.bindTooltip(
+                `<div>
+                     武塔｜總人流：3,342
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_a63f2d34e48a88759569d428abd35df6 = L.circleMarker(
+                [23.60571, 121.38963],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_a63f2d34e48a88759569d428abd35df6.bindTooltip(
+                `<div>
+                     大富｜總人流：3,299
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_e9fb69b15ec4b917792aafc2b24adc83 = L.circleMarker(
+                [22.97997, 121.15595],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_e9fb69b15ec4b917792aafc2b24adc83.bindTooltip(
+                `<div>
+                     瑞和｜總人流：3,219
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_94c337a6410aad1848c9db003cde14c8 = L.circleMarker(
+                [22.86194, 121.13778],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_94c337a6410aad1848c9db003cde14c8.bindTooltip(
+                `<div>
+                     山里｜總人流：3,158
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_5c6d031eb09341b240e6aad0d0ec643e = L.circleMarker(
+                [23.10292, 121.17676],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_5c6d031eb09341b240e6aad0d0ec643e.bindTooltip(
+                `<div>
+                     海端｜總人流：2,938
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_401649b5fd39d4ac002295baf2a43c96 = L.circleMarker(
+                [23.22605, 121.27842],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_401649b5fd39d4ac002295baf2a43c96.bindTooltip(
+                `<div>
+                     東竹｜總人流：2,880
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_4b0d3abab750e8866905fedc2afab5a6 = L.circleMarker(
+                [22.26704, 120.65947],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_4b0d3abab750e8866905fedc2afab5a6.bindTooltip(
+                `<div>
+                     枋山｜總人流：1,752
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_c0349fdd5a3a51239ea1d6db68e166a2 = L.circleMarker(
+                [24.33543, 121.76838],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_c0349fdd5a3a51239ea1d6db68e166a2.bindTooltip(
+                `<div>
+                     漢本｜總人流：1,746
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_680f56066fbaed7ad88ca776518e16e0 = L.circleMarker(
+                [22.30617, 120.64331],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_680f56066fbaed7ad88ca776518e16e0.bindTooltip(
+                `<div>
+                     內獅｜總人流：325
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_aa9bb9cb2f4f342fb53a2e09a6ccc40f = L.circleMarker(
+                [24.97992, 121.40554],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_aa9bb9cb2f4f342fb53a2e09a6ccc40f.bindTooltip(
+                `<div>
+                     樹林調車場｜總人流：5
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_0a809cf732e68bf85e5129b904294da0 = L.circleMarker(
+                [24.61541, 121.82291],
+                {"bubblingMouseEvents": true, "color": "steelblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "steelblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_50fd11f47ad5606b878d9698f69d14fd);
+        
+    
+            circle_marker_0a809cf732e68bf85e5129b904294da0.bindTooltip(
+                `<div>
+                     新馬｜總人流：1
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+</script>
+</html>
